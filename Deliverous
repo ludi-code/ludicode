@@ -1,5 +1,5 @@
 java:
-  image: marcailleflorent/ludicode-v4.2
+  image: ludicode/ludicode
   ports:
   - ip: 188.165.54.125
     container_port: 8080
