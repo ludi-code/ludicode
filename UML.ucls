@@ -199,7 +199,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="fr.iutinfo.App" project="Ludicode" 
+  <class id="23" language="java" name="fr.iutinfo.Apiv1" project="Ludicode"
     file="/Ludicode/src/main/java/fr/iutinfo/App.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2225" y="166"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="false" 

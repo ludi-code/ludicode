@@ -1,4 +1,4 @@
-package fr.iutinfo.resources;
+package eu.ludicode.api1;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -7,7 +7,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import fr.iutinfo.App;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.ProfileInfo;
 import fr.iutinfo.dao.LevelDao;

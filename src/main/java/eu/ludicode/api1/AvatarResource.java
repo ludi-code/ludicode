@@ -1,4 +1,4 @@
-package fr.iutinfo.resources;
+package eu.ludicode.api1;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,4 +1,4 @@
-package fr.iutinfo.resources;
+package eu.ludicode.api1;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +13,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import fr.iutinfo.App;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.User;
