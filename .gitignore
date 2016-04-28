@@ -10,3 +10,7 @@ data.db
 hs*
 src/main/webapp/images/avatars/
 .nfs*
+
+# intellij
+*.iml
+.idea/
