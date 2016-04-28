@@ -11,6 +11,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.LeaderboardRow;
 import fr.iutinfo.beans.LevelInfo;
@@ -23,7 +24,7 @@ import fr.iutinfo.utils.Session;
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 
 public class LevelProgressRessource {
-	private static LevelProgressDao dao = App.dbi.open(LevelProgressDao.class);
+	private static LevelProgressDao dao = BDDFactory.getDbi().open(LevelProgressDao.class);
 	
 	@POST
 	@Path("/putProgress/{cookie}/{idLevel}")

@@ -10,6 +10,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.FriendsRelationsDao;
@@ -21,8 +22,8 @@ import fr.iutinfo.utils.Session;
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class FriendsRelationsResource {
 
-	private static FriendsRelationsDao friendDao = App.dbi.open(FriendsRelationsDao.class);
-	private static UserDao userDao = App.dbi.open(UserDao.class);
+	private static FriendsRelationsDao friendDao = BDDFactory.getDbi().open(FriendsRelationsDao.class);
+	private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
 
 	public FriendsRelationsResource() {
 		/*try {

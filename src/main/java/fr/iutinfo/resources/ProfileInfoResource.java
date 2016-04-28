@@ -8,6 +8,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.ProfileInfo;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.UserDao;
@@ -17,8 +18,8 @@ import fr.iutinfo.utils.Session;
 @Path("/profile")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class ProfileInfoResource {
-	private static UserDao userDao = App.dbi.open(UserDao.class);
-	private static LevelDao levelDao = App.dbi.open(LevelDao.class);
+	private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 
 	
 	@GET

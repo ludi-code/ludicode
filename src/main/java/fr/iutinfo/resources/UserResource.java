@@ -14,6 +14,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.UserDao;
@@ -23,7 +24,7 @@ import fr.iutinfo.utils.Utils;
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class UserResource {
-	private static UserDao dao = App.dbi.open(UserDao.class);
+	private static UserDao dao = BDDFactory.getDbi().open(UserDao.class);
 
 	public UserResource() {}
 
@@ -93,7 +94,7 @@ public class UserResource {
 		}
 
 		// Test si le pseudo existe déjà ou non
-		User u = dao.isNameExist(pseudo);
+		User u = dao.findByName(pseudo);
 		if(u != null)
 			return new Feedback(false, "Le pseudo est déjà utilisé");
 
@@ -112,7 +113,7 @@ public class UserResource {
 		}
 
 		// Test si l'email a déjà été utilisée
-		User u = dao.isEmailExist(mail);
+		User u = dao.findByEmail(mail);
 		if(u != null)
 			return new Feedback(false, "L'adresse email est déjà utilisée");
 

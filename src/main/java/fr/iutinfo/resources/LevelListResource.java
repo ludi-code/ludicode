@@ -12,6 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.LevelList;
 import fr.iutinfo.dao.LevelDao;
@@ -23,8 +24,8 @@ import fr.iutinfo.utils.Session;
 @Path("/levelLists")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class LevelListResource {
-	private static LevelListDao levelListDao = App.dbi.open(LevelListDao.class);
-	private static LevelDao levelDao = App.dbi.open(LevelDao.class);
+	private static LevelListDao levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
+	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 
 	@GET
 	@Path("{id}")

@@ -10,6 +10,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Instruction;
 import fr.iutinfo.dao.InstructionsDao;
 
@@ -18,7 +19,7 @@ import fr.iutinfo.dao.InstructionsDao;
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class InstructionsResource {
 
-	private static InstructionsDao instructionsDao = App.dbi.open(InstructionsDao.class);
+	private static InstructionsDao instructionsDao = BDDFactory.getDbi().open(InstructionsDao.class);
 
 
 	public InstructionsResource() {}

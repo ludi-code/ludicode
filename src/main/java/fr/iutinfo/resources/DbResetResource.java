@@ -6,6 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.dao.FriendsRelationsDao;
 import fr.iutinfo.dao.InstructionsDao;
 import fr.iutinfo.dao.LevelDao;
@@ -19,12 +20,12 @@ import fr.iutinfo.utils.Utils;
 @Produces(MediaType.TEXT_HTML)
 public class DbResetResource {
 
-	private static FriendsRelationsDao friendDao = App.dbi.open(FriendsRelationsDao.class);
-	private static UserDao userDao = App.dbi.open(UserDao.class);
-	private static LevelDao levelDao = App.dbi.open(LevelDao.class);
-	private static InstructionsDao instructionsDao = App.dbi.open(InstructionsDao.class);
-	private static LevelListDao levelListDao = App.dbi.open(LevelListDao.class);
-	private static LevelProgressDao levelProgressDAO = App.dbi.open(LevelProgressDao.class);
+	private static FriendsRelationsDao friendDao = BDDFactory.getDbi().open(FriendsRelationsDao.class);
+	private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
+	private static InstructionsDao instructionsDao = BDDFactory.getDbi().open(InstructionsDao.class);
+	private static LevelListDao levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
+	private static LevelProgressDao levelProgressDAO = BDDFactory.getDbi().open(LevelProgressDao.class);
 
 
 	

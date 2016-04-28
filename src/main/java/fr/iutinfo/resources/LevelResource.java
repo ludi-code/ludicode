@@ -12,6 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.App;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Feedback;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.NotifLevel;
@@ -25,9 +26,9 @@ import fr.iutinfo.utils.Session;
 @Path("/levels")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class LevelResource {
-	private static LevelDao levelDao = App.dbi.open(LevelDao.class);
-	private static InstructionsDao instructionsDao = App.dbi.open(InstructionsDao.class);
-	private static LevelListDao levelListDao = App.dbi.open(LevelListDao.class);
+	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
+	private static InstructionsDao instructionsDao = BDDFactory.getDbi().open(InstructionsDao.class);
+	private static LevelListDao levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
 
 	public LevelResource() {}
 
