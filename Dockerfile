@@ -4,8 +4,8 @@ run apt-get update && \
     apt-get clean 
 add pom.xml /srv/ludicode/
 workdir /srv/ludicode/
-run mvn install
+#run mvn install
 add src /srv/ludicode/src/
-run mvn install
+#run mvn install
 expose 8080
 cmd mvn jetty:run
