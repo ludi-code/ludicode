@@ -1,12 +1,10 @@
-package fr.iutinfo.beans;
+package eu.ludicode.api.dto;
 
 public class Feedback {
-	private boolean success;
-	private String message;
+	private boolean success = true;
+	private String message = "";
 	
 	public Feedback() {
-		this.success = true;
-		this.message = new String();
 	}
 	
 	public Feedback(boolean success, String message) {

@@ -1,4 +1,4 @@
-package eu.ludicode.api1;
+package eu.ludicode.api.v1;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.BDDFactory;
-import fr.iutinfo.beans.Feedback;
+import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.NotifLevel;
 import fr.iutinfo.beans.NotifLevelCount;

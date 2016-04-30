@@ -1,4 +1,4 @@
-package eu.ludicode.api1;
+package eu.ludicode.api.v1;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +14,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.BDDFactory;
-import fr.iutinfo.beans.Feedback;
+import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.UserDao;
 import fr.iutinfo.utils.Session;
@@ -47,7 +47,7 @@ public class UserResource {
 				user.setPassword(hashedPassword);
 
 				// on insert l'utilisateur dans la bdd.
-				dao.insert(user.getName(), user.getPassword(), user.getEmail());
+				dao.insert(user);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

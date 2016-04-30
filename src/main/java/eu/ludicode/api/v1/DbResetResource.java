@@ -1,6 +1,7 @@
-package eu.ludicode.api1;
+package eu.ludicode.api.v1;
 
 import fr.iutinfo.BDDFactory;
+import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.*;
 import fr.iutinfo.utils.Utils;
 
@@ -58,9 +59,9 @@ public class DbResetResource {
 
         userDao.createUserTable();
 
-        userDao.insert("toto", Utils.hashMD5("toto"), "toto@toto.to");
-        userDao.insert("titi", Utils.hashMD5("titi"), "titi@titi.ti");
-        userDao.insert("tata", Utils.hashMD5("tata"), "tata@tata.ta");
+        userDao.insert(new User("toto", Utils.hashMD5("toto"), "toto@toto.to"));
+        userDao.insert(new User("titi", Utils.hashMD5("titi"), "titi@titi.ti"));
+        userDao.insert(new User("tata", Utils.hashMD5("tata"), "tata@tata.ta"));
 
         return "Table user Reset";
     }

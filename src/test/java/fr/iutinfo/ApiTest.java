@@ -5,9 +5,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple Apiv1.
+ * Unit test for simple Api.
  */
-public class Apiv1Test
+public class ApiTest
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class Apiv1Test
      *
      * @param testName name of the test case
      */
-    public Apiv1Test(String testName )
+    public ApiTest(String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class Apiv1Test
      */
     public static Test suite()
     {
-        return new TestSuite( Apiv1Test.class );
+        return new TestSuite( ApiTest.class );
     }
 
     /**

@@ -5,7 +5,7 @@ import org.glassfish.jersey.test.JerseyTest;
 public class RestClientTest extends JerseyTest {
 	/*@Override
     protected Application configure() {
-        return new Apiv1();
+        return new Api();
     }
 
 	@Test

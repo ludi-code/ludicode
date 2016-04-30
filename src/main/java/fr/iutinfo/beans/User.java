@@ -1,9 +1,5 @@
 package fr.iutinfo.beans;
 
-/**
- * Represent a User with his id, name, passwd, email and his relative cookie
- * @author Florent
- */
 public class User {
 
     private int id = 0;
@@ -13,20 +9,18 @@ public class User {
     private String email;
     private String cookie;
 
-    /**
-     * Constructor of User
-     * @param id
-     * @param name 
-     */
     public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    /**
-     * Void User constructor
-     */
     public User() { }
+
+    public User(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

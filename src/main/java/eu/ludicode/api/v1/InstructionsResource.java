@@ -1,4 +1,4 @@
-package eu.ludicode.api1;
+package eu.ludicode.api.v1;
 
 import java.util.List;
 

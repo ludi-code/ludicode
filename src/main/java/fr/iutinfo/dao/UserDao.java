@@ -1,10 +1,7 @@
 package fr.iutinfo.dao;
 
 import fr.iutinfo.beans.User;
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
@@ -22,7 +19,7 @@ public interface UserDao {
 
     @SqlUpdate("insert into users (name, password, email) values (:name, :password, :email)")
     @GetGeneratedKeys
-    int insert(@Bind("name") String name, @Bind("password") String password, @Bind("email") String email);
+    int insert(@BindBean() User user);
 
     @SqlQuery("select * from users where id = :id")
     @RegisterMapperFactory(BeanMapperFactory.class)
