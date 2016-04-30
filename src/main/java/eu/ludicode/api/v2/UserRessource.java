@@ -8,6 +8,8 @@ import fr.iutinfo.dao.UserDao;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+
+
 @Path("/users")
 public class UserRessource {
     private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
@@ -15,7 +17,7 @@ public class UserRessource {
     @POST
     @Path("/register")
     public User createUser(User user) {
+        user.setId(userDao.insert(user));
         return user;
-
     }
 }

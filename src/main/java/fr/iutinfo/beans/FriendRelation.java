@@ -1,12 +1,10 @@
 package fr.iutinfo.beans;
 
 public class FriendRelation {
-	private int idUser;
-	private int idFriend;
+	private int idUser = 0;
+	private int idFriend = 0;
 	
 	public FriendRelation() {
-		idUser = 0;
-		idFriend = 0;
 	}
 	
 	public FriendRelation(int idUser, int idFriend) {
