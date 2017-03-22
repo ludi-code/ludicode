@@ -13,7 +13,11 @@ import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.UserDao;
 import fr.iutinfo.utils.Session;
 
-
+/**
+ * Cette classe permet de recuperer les infos d'un profile
+ * @author diabatm
+ *
+ */
 @Path("/profile")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class ProfileInfoResource {

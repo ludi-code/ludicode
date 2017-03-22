@@ -16,7 +16,11 @@ import fr.iutinfo.dao.FriendsRelationsDao;
 import fr.iutinfo.dao.UserDao;
 import fr.iutinfo.utils.Session;
 
-
+/**
+ * Cette classe permet d'ajouter un ami à un utilisateur
+ * @author diabatm
+ *
+ */
 @Path("/friends")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class FriendsRelationsResource {
@@ -42,7 +46,10 @@ public class FriendsRelationsResource {
 		return out;
 	}
 
-
+	/**
+	 * @param cookie
+	 * @return liste d'ami
+	 */
 	@GET
 	@Path("/me/{cookie}")
 	public List<User> getMyFriends(@PathParam("cookie") String cookie) {

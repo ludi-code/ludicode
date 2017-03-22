@@ -17,8 +17,11 @@ import fr.iutinfo.beans.LevelList;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelListDao;
 import fr.iutinfo.utils.Session;
-
-
+/**
+ * Cette classe permet de reccuperer la liste des levels fait par users
+ * @author diabatm
+ *
+ */
 
 @Path("/levelLists")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
