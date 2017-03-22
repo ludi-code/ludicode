@@ -3,9 +3,7 @@ package eu.ludicode.api.v2;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.UserDao;
-
 import java.util.List;
-
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Before;

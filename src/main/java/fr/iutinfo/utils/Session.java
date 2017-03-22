@@ -7,10 +7,6 @@ import fr.iutinfo.beans.User;
 public class Session {
 	private static HashMap<String, User> loggedUsers = new HashMap<String, User>();
 	
-	private Session() {
-		
-	}
-	
 	public static void addUser(String id, User u) {
 		loggedUsers.put(id, u);
 	}
