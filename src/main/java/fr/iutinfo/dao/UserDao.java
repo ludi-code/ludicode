@@ -7,6 +7,13 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 import java.util.List;
 
+/**
+ * Database Access Object relative to Users
+ *  A user has a name, password, email, and a datetime telling 
+ *  the last time the user check his notifications
+ * Table users
+ * @author vitsem
+ */
 public interface UserDao {
 
     @SqlUpdate("create table users ("

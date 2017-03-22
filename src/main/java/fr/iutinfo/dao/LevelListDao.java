@@ -12,6 +12,12 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import fr.iutinfo.beans.LevelList;
 import fr.iutinfo.beans.LevelListAssociation;
 	
+/**
+ * Database Access Object relative to the LevelLists
+ *  ???
+ * Tables :  levelLists, levelListAssociations
+ * @author vitsem
+ */
 public interface LevelListDao {
 	
 	@SqlUpdate("create table levelLists (id integer primary key autoincrement, name varchar(100), idAuthor integer)")
