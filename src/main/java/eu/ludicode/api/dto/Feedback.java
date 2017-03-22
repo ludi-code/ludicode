@@ -1,5 +1,9 @@
 package eu.ludicode.api.dto;
 
+/*
+ * 
+ * 
+ */
 public class Feedback {
 	private boolean success = true;
 	private String message = "";

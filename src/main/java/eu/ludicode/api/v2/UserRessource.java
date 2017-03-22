@@ -5,6 +5,9 @@ import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.UserDao;
 
+import java.util.List;
+
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -19,5 +22,10 @@ public class UserRessource {
     public User createUser(User user) {
         user.setId(userDao.insert(user));
         return user;
+    }
+    
+    @GET
+    public List<User> readAll() {
+    	return userDao.getAll();
     }
 }
