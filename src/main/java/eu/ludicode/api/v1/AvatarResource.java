@@ -13,7 +13,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+/**
+ * Cette classe permet d'ajouter et de recuperer un avatar d'un joueur
+ * @author diabatm
+ *
+ */
 @Path("/avatars")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class AvatarResource {

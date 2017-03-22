@@ -20,7 +20,11 @@ import fr.iutinfo.dao.InstructionsDao;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelListDao;
 import fr.iutinfo.utils.Session;
-
+/**
+ * Cette classe gere les niveaux
+ * @author diabatm
+ *
+ */
 
 @Path("/levels")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

@@ -17,7 +17,11 @@ import fr.iutinfo.beans.LevelInfo;
 import fr.iutinfo.beans.LevelProgress;
 import fr.iutinfo.dao.LevelProgressDao;
 import fr.iutinfo.utils.Session;
-
+/**
+ * Cette classe permet de recuperer la progression d'un users dans un niveau
+ * @author diabatm
+ *
+ */
 
 @Path("/levelProgress")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

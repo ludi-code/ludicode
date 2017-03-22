@@ -13,7 +13,6 @@ import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Instruction;
 import fr.iutinfo.dao.InstructionsDao;
 
-
 @Path("/instructions")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class InstructionsResource {
