@@ -3,47 +3,41 @@ package fr.iutinfo.beans;
 /**
  * Classe rassemblant les données d'un professeur.
  * @author vitsem
- *
  */
 
-public class Teacher {
-	private int id = 0;
-    private String name;
-    private String password;
-    private String email;
-    private String cookie;
+public class Teacher extends User2 {
+	
+	private String email;
 
     public Teacher(int id, String name) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
 
-    public Teacher() { }
+    public Teacher() { super(); }
 
     public Teacher(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
+        super(name, password);
         this.email = email;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() { return super.getId(); }
+    public void setId(int id) { super.setId(id); }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getName() { return super.getName(); }
+    public void setName(String name) { super.setName(name); }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getPassword() { return super.getPassword(); }
+    public void setPassword(String password) { super.setPassword(password); }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getCookie() { return cookie; }
-    public void setCookie(String cookie) { this.cookie = cookie; }
+    public String getCookie() { return super.getCookie(); }
+    public void setCookie(String cookie) { super.setCookie(cookie); }
     
     @Override
-    public String toString() { return id + ": " + name; }
+    public String toString() { return super.toString(); }
     
-    public boolean equals(Object other) { return this.id == ((Teacher) other).id; }
+    public boolean equals(Object other) { return super.equals(other); }
 	
 }

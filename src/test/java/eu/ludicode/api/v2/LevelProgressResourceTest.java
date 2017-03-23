@@ -48,7 +48,6 @@ public class LevelProgressResourceTest {
 		info.setId(1);
 		info.setName("Level");
 		ArrayList<LevelInfo> progress = (ArrayList<LevelInfo>)levelProgressResource.getLevelsDone(1);
-		System.out.println("SIZE : " + progress.size());
 		Assert.assertEquals(progress.get(0).getId(), info.getId());
 		Assert.assertEquals(progress.get(0).getName(), info.getName());
 	}

@@ -9,17 +9,17 @@ import java.util.List;
  */
 public class WebsocketConnectedUsers extends WebsocketObject {
 
-    private List<User> users;
+    private List<User2> users;
 
     public WebsocketConnectedUsers() {
         setType(1);
     }
 
-    public List<User> getUsers() {
+    public List<User2> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<User2> users) {
         this.users = users;
     }
 

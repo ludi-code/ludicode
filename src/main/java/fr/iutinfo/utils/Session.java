@@ -2,28 +2,38 @@ package fr.iutinfo.utils;
 
 import java.util.HashMap;
 
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.Student;
+import fr.iutinfo.beans.Teacher;
+import fr.iutinfo.beans.User2;
 
 public class Session {
-	private static HashMap<String, User> loggedUsers = new HashMap<String, User>();
+	private static HashMap<String, User2> loggedUsers = new HashMap<String, User2>();
 	
-	public static void addUser(String id, User u) {
-		loggedUsers.put(id, u);
+	public static void addUser(String cookie, User2 u) {
+		loggedUsers.put(cookie, u);
 	}
 	
-	public static void removeUser(String id) {
-		loggedUsers.remove(id);
+	public static void removeUser(String cookie) {
+		loggedUsers.remove(cookie);
 	}
 	
-	public static User getUser(String id) {
-		return loggedUsers.get(id);
+	public static User2 getUser(String cookie) {
+		return loggedUsers.get(cookie);
 	}
 	
-	public static boolean isLogged(String id) {
-		return loggedUsers.containsKey(id);
+	public static boolean isLogged(String cookie) {
+		return loggedUsers.containsKey(cookie);
 	}
 	
-	public static boolean isLogged(User u) {
+	public static boolean isLogged(User2 u) {
 		return loggedUsers.containsValue(u);
+	}
+	
+	public static boolean isTeacher(String cookie) {
+		return isLogged(cookie) && loggedUsers.get(cookie) instanceof Teacher;
+	}
+	
+	public static boolean isStudent(String cookie) {
+		return isLogged(cookie) && loggedUsers.get(cookie) instanceof Student;
 	}
 }

@@ -1,18 +1,25 @@
 package eu.ludicode.api.v1;
 
 
-import eu.ludicode.api.dto.Feedback;
-import fr.iutinfo.beans.User;
-import fr.iutinfo.utils.Session;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+
+import eu.ludicode.api.dto.Feedback;
+import fr.iutinfo.beans.User2;
+import fr.iutinfo.utils.Session;
 /**
  * Cette classe permet d'ajouter et de recuperer un avatar d'un joueur
  * @author diabatm
@@ -35,7 +42,7 @@ public class AvatarResource {
             return new Feedback(false, "Image trop volumineuse (> 42Ko)");
 
 
-        User user = Session.getUser(cookie);
+        User2 user = Session.getUser(cookie);
 
         try {
             saveToFile(uploadedInputStream, "src/main/webapp/images/avatars/" + user.getName() + ".png");
@@ -55,7 +62,7 @@ public class AvatarResource {
             return new Feedback(false, "Not logged");
         }
 
-        User user = Session.getUser(cookie);
+        User2 user = Session.getUser(cookie);
 
         String filename = "images/avatars/" + user.getName() + ".png";
         File file = new File(filename);

@@ -13,12 +13,15 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import fr.iutinfo.BDDFactory;
 import eu.ludicode.api.dto.Feedback;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.UserDao;
 import fr.iutinfo.utils.Session;
 import fr.iutinfo.utils.Utils;
+
+//CLASSE OBSOLETE
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
@@ -131,14 +134,14 @@ public class UserResource {
 
 	@POST
 	@Path("/login")
-	public Feedback logUser(User user) {
+	public Feedback logUser(User2 user) {
 		String hashedPassword = Utils.hashMD5(user.getPassword());
 		if(hashedPassword == null)
 			return new Feedback(false, "An error occurs during hashing");
 		user.setPassword(hashedPassword);
-		User u = null;
+		User2 u = null;
 		try {
-			u = dao.userIsCorrect(user.getName(), user.getPassword());
+			//u = dao.userIsCorrect(user.getName(), user.getPassword());
 			if(u == null) 
 				return new Feedback(false, "Mauvais pseudo/mot de passe !");
 		} catch (Exception e) {
@@ -186,7 +189,7 @@ public class UserResource {
 
 	@GET
 	@Path("/me/{cookie}")
-	public User getUser(@PathParam("cookie") String cookie) {
+	public User2 getUser(@PathParam("cookie") String cookie) {
 		if(Session.isLogged(cookie))
 			return Session.getUser(cookie);
 

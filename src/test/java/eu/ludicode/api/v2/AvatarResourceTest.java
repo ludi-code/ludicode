@@ -5,24 +5,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import eu.ludicode.api.dto.Feedback;
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.utils.Session;
 public class AvatarResourceTest {
 
-	User user;
+	User2 user;
 	
 	@Before
 	public void initUser(){
-		user = new User();
-		user.setEmail("anor.londo@gwyn.fr");
+		user = new User2();
 		user.setName("Artorias");
 	}
 
 	@Test
 	public void test_get_should_return_good_Feedback(){
 		AvatarResource avatar = new AvatarResource();
-		Session s = new Session();
-		s.addUser("1", user);
+		Session.addUser("1", user);
 		String cookie1 = "1";
 		String cookie2 = "2";
 		Feedback feed1=new Feedback(true,"src/main/webapp/images/avatars/Artorias.png");

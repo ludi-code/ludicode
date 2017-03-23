@@ -23,7 +23,7 @@ public interface LevelListDao {
 	@SqlUpdate("create table levelLists (id integer primary key autoincrement, name varchar(100), idAuthor integer)")
 	void createLevelListsTable();
 	
-	@SqlUpdate("create table levelListAssociations (idList integer, idLevel integer, position integer, CONSTRAINT pk_association PRIMARY KEY (idList, idLevel))")
+	@SqlUpdate("create table levelListAssociations (idList integer, idLevel integer, position integer, CONSTRAINT pk_association PRIMARY KEY (idList, idLevel), CONSTRAINT fk_list FOREIGN KEY (idList) REFERENCES levelLists(id), CONSTRAINT fk_level FOREIGN KEY (idLevel) REFERENCES levels(id))")
 	void createLevelListAssociationsTable();
 	
 	@SqlUpdate("insert into levelLists (name, idAuthor) values (:name, :idAuthor)")

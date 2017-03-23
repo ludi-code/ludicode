@@ -15,7 +15,7 @@ import fr.iutinfo.beans.Student;
 /**
  * Database Access Object relative to students
  *  A student has a name, password, and a datetime telling 
- *  the last time the user check his notifications.
+ *  the last time the student check his notifications.
  *  He also has an id representing his student.
  * Table teachers
  * @author vitsem
@@ -28,8 +28,9 @@ public interface StudentDao {
             + "name varchar(100), "
             + "password text, "
             + "idTeacher integer, "
-            + "lastNotifChecking DATETIME DEFAULT CURRENT_TIMESTAMP)")
-    void createUserTable();
+            + "lastNotifChecking DATETIME DEFAULT CURRENT_TIMESTAMP,"
+            + "CONSTRAINT fk_teacher FOREIGN KEY (idTeacher) REFERENCES teachers(id))")
+    void createStudentTable();
 	
 	@SqlUpdate("insert into students (name, password, idTeacher) values (:name, :password, :idTeacher)")
     @GetGeneratedKeys
@@ -45,15 +46,15 @@ public interface StudentDao {
 	
 	@SqlQuery("select * from students where name like :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Student> searchUsers(@Bind("name") String name);
+    List<Student> searchStudents(@Bind("name") String name);
 
     @SqlQuery("select id, name, idTeacher from students where name = :name AND password = :password")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Student userIsCorrect(@Bind("name") String name, @Bind("password") String password);
+    Student studentIsCorrect(@Bind("name") String name, @Bind("password") String password);
 
     @SqlQuery("select * from students where idTeacher = :idTeacher")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Student findByIdTeacher(@Bind("idTeacher") int idTeacher);
+    List<Student> findByIdTeacher(@Bind("idTeacher") int idTeacher);
 
     @SqlQuery("select * from students")
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -77,7 +78,7 @@ public interface StudentDao {
     void updatePassword(@Bind("id") int id, @Bind("password") String password);
 
     @SqlUpdate("drop table if exists students")
-    void dropUserTable();
+    void dropStudentTable();
 
     void close();
 

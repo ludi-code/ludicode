@@ -1,6 +1,8 @@
 package eu.ludicode.api.v2;
 
 import fr.iutinfo.BDDFactory;
+import fr.iutinfo.beans.Student;
+import fr.iutinfo.beans.Teacher;
 import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.*;
 import fr.iutinfo.utils.Utils;
@@ -10,13 +12,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * Classe permettant d'initialiser la BDD.
+ * @author vitsem
+ */
 
 @Path("/resetDb")
 @Produces(MediaType.TEXT_HTML)
 public class DbResetResource {
 
     private static FriendsRelationsDao friendDao = BDDFactory.getDbi().open(FriendsRelationsDao.class);
-    private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+    //private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+    private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
+    private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
     private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
     private static InstructionsDao instructionsDao = BDDFactory.getDbi().open(InstructionsDao.class);
     private static LevelListDao levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
@@ -26,7 +34,8 @@ public class DbResetResource {
     @GET
     public String whichDatabase() {
         return "<ul>"
-                + "<li><a href='resetDb/users'>Reset users table</a></li>"
+                + "<li><a href='resetDb/teachers'>Reset teachers table</a></li>"
+                + "<li><a href='resetDb/students'>Reset students table</a></li>"
                 + "<li><a href='resetDb/relations'>Reset relations table</a></li>"
                 + "<li><a href='resetDb/levels'>Reset levels table</a></li>"
                 + "<li><a href='resetDb/instructions'>Reset instructions table</a></li>"
@@ -41,22 +50,23 @@ public class DbResetResource {
     @Path("all")
     public String resetDatabase() {
 
-        resetDbUsers();
+        //resetDbUsers();
+    	resetDbTeachers();
+    	resetDbStudents();
         resetDbInstructions();
         resetDbLevels();
         resetDbFriendsRelations();
         resetDbLevelList();
-        resetDbUsers();
+        //resetDbUsers();
         resetDbLevelProgress();
 
         return "All Tables Reset";
     }
 
-    @GET
+    /*@GET
     @Path("users")
     public String resetDbUsers() {
         userDao.dropUserTable();
-
         userDao.createUserTable();
 
         userDao.insert(new User("toto", Utils.hashMD5("toto"), "toto@toto.to"));
@@ -64,6 +74,28 @@ public class DbResetResource {
         userDao.insert(new User("tata", Utils.hashMD5("tata"), "tata@tata.ta"));
 
         return "Table user Reset";
+    }*/
+    
+    @Path("teachers")
+    public String resetDbTeachers() {
+    	teacherDao.dropTeacherTable();
+    	teacherDao.createTeacherTable();
+    	
+    	teacherDao.insert(new Teacher("Totoro", "Totoro", "totoro@totoro.to"));
+    	
+    	return "Table teachers reset";
+    }
+    
+    @Path("students")
+    public String resetDbStudents() {
+    	studentDao.dropStudentTable();
+    	studentDao.createStudentTable();
+    	
+    	studentDao.insert(new Student("toto", Utils.hashMD5("toto"), 1));
+    	studentDao.insert(new Student("titi", Utils.hashMD5("titi"), 1));
+    	studentDao.insert(new Student("tata", Utils.hashMD5("tata"), 1));
+    	
+    	return "Table students reset";
     }
 
     @GET
@@ -80,7 +112,7 @@ public class DbResetResource {
         levelProgressDAO.insert(2, 4);
 
 
-        return "Table levelProgress Reset";
+        return "Table levelProgress reset";
     }
 
 
@@ -93,7 +125,7 @@ public class DbResetResource {
 
         friendDao.createRelation(2, 1);
         friendDao.createRelation(1, 2);
-        return "Table friendsRelations Reset";
+        return "Table friendsRelations reset";
     }
 
 
@@ -255,7 +287,7 @@ public class DbResetResource {
 				1);					// author id
 		*/
 
-        return "Table levels Reset";
+        return "Table levels reset";
     }
 
 
@@ -295,7 +327,7 @@ public class DbResetResource {
         instructionsDao.insert("Si PAS de chemin à droite", "if (!player.canGoRight())", 200, 2, "images/doc/si_non_droite_sinon.png", "images/doc/avancer.gif", "Les instructions dans la première partie du bloc seront exécutées s'il n'y a pas de chemin à droite le personnage. Sinon, les instructions de la deuxième partie du bloc seront executés.", 2);    // ID 21
         instructionsDao.insert("Si PAS de chemin derrière", "if (!player.canGoBackward())", 200, 2, "images/doc/si_non_derrière_sinon.png", "images/doc/avancer.gif", "Les instructions dans la première partie du bloc seront exécutées s'il n'y a pas de chemin derrière le personnage. Sinon, les instructions de la deuxième partie du bloc seront executés.", 2);    // ID 22
 
-        return "Table instructions Reset";
+        return "Table instructions reset";
     }
 
 
@@ -327,7 +359,7 @@ public class DbResetResource {
         //levelListDao.insertAssociation(3, 14, 3);
         //levelListDao.insertAssociation(3, 15, 4);
 
-        return "Table instructions Reset";
+        return "Table instructions reset";
     }
 
 }

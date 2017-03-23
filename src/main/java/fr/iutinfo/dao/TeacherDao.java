@@ -15,7 +15,7 @@ import fr.iutinfo.beans.Teacher;
 /**
  * Database Access Object relative to teachers
  *  A teacher has a name, password, email, and a datetime telling 
- *  the last time the user check his notifications
+ *  the last time the teacher check his notifications
  * Table teachers
  * @author vitsem
  */
@@ -27,7 +27,7 @@ public interface TeacherDao {
             + "password text, "
             + "email varchar(50), "
             + "lastNotifChecking DATETIME DEFAULT CURRENT_TIMESTAMP)")
-    void createUserTable();
+    void createTeacherTable();
 	
 	@SqlUpdate("insert into teachers (name, password, email) values (:name, :password, :email)")
     @GetGeneratedKeys
@@ -43,11 +43,11 @@ public interface TeacherDao {
 	
 	@SqlQuery("select * from teachers where name like :name")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    List<Teacher> searchUsers(@Bind("name") String name);
+    List<Teacher> searchTeachers(@Bind("name") String name);
 
     @SqlQuery("select id, name, email from teachers where name=:name AND password=:password")
     @RegisterMapperFactory(BeanMapperFactory.class)
-    Teacher userIsCorrect(@Bind("name") String name, @Bind("password") String password);
+    Teacher teacherIsCorrect(@Bind("name") String name, @Bind("password") String password);
 
     @SqlQuery("select * from teachers where email=:email")
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -75,7 +75,7 @@ public interface TeacherDao {
     void updatePassword(@Bind("id") int id, @Bind("password") String password);
 
     @SqlUpdate("drop table if exists teachers")
-    void dropUserTable();
+    void dropTeacherTable();
 
     void close();
 

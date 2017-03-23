@@ -67,7 +67,7 @@ public class UserResourceTest {
 		Assert.assertEquals("Napoleon", users.get(1).getName());
 	}
 	
-	@Test
+	/*@Test
 	public void test_connection_utilisateur(){
 		User user = new User();
 		user.setEmail("email@test.com");
@@ -83,7 +83,7 @@ public class UserResourceTest {
 		Feedback fb=userRessource.logUser(user2);
 
 		Assert.assertTrue(fb.isSuccess());
-	}
+	}*/
 	
 	
 }

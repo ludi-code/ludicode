@@ -12,7 +12,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.beans.WebsocketConnectedUsers;
 import fr.iutinfo.beans.WebsocketMessage;
 import fr.iutinfo.beans.WebsocketObject;
@@ -41,7 +41,7 @@ public class MyServerEndpoint {
 	}
 	
 	private WebsocketConnectedUsers getConnectedUsers() {
-		List<User> users = new ArrayList<User>();
+		List<User2> users = new ArrayList<User2>();
 		for(Map.Entry<String, Session> entry : connectedUsers.entrySet()) {
 			users.add(fr.iutinfo.utils.Session.getUser(entry.getKey()));
 		}

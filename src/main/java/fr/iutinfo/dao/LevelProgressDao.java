@@ -24,8 +24,8 @@ public interface LevelProgressDao {
             + "idUser INT NOT NULL, "
             + "idLevel INT NOT NULL, "
             + "CONSTRAINT pk_LevelProgress PRIMARY KEY (idUser, idLevel), "
-            + "CONSTRAINT fk_user FOREIGN KEY (idUser) REFERENCES Users(id), "
-            + "CONSTRAINT fk_level FOREIGN KEY (idLevel) REFERENCES Levels(id))")
+            + "CONSTRAINT fk_user FOREIGN KEY (idUser) REFERENCES users(id), "
+            + "CONSTRAINT fk_level FOREIGN KEY (idLevel) REFERENCES levels(id))")
     void createLevelProgressTable();
 
     @SqlUpdate("INSERT INTO LevelProgress(idUser, idLevel) "
