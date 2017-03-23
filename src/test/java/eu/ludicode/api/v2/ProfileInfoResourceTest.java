@@ -10,7 +10,7 @@ import fr.iutinfo.beans.User;
 import fr.iutinfo.dao.UserDao;
 
 
-public class ProfileInfoRessourceTest {
+public class ProfileInfoResourceTest {
 	
     @Before
     public void initTableUser () {
@@ -21,7 +21,7 @@ public class ProfileInfoRessourceTest {
 
 	
 	@Test
-	public void getProfileInfo(){
+	public void test_getProfileInfo(){
         User user = new User();
         user.setEmail("email de test");
         user.setName("Napoleon");
