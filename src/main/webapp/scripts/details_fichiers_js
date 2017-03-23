@@ -1,0 +1,22 @@
+
+events.js		gere les evenements fin de partie et les collisions
+main.js			un peu de tout
+			initialise les options de jeu (theme, vitesse
+			gestion de la taille de la fenetre du navigateur
+			gestion du theme de jeu et de la vitesse de deplacement
+animation.js		represente une animation en fonction d'une image
+block_creator.js	cree un block
+carte_creator.js	cree une carte
+game.js
+graphical_player	permet de representer le joueur graphiquement
+grid.js 		permet de representer la grille d'un niveau
+interpreter.js		permet d'interpreter les blocs d'instructions en instructions
+interpreterCarte.js     idem -> donc supprime
+player.js		gere les deplacements du personnage
+theme.js
+
+FICHIERS JS PRENSENTS DANS page_controllers
+
+all.js		liste toutes les pages necessitant d'etre logué
+editor.js
+
