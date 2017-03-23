@@ -1,5 +1,5 @@
 ##rétrospective de sprint
-Nom du master scrum des print 3: Quentin Beaudoul
+Nom du master scrum du sprint 3: Quentin Beaudoul
 
 ##Ce que nous avons fait durant ces sprints:
 
@@ -17,7 +17,7 @@ Nom du master scrum des print 3: Quentin Beaudoul
 ##qu'avons nous observé ?
 	L'application Android n'est pas au point du tout.
 ###Qu'elle décision prenons nous suite à cette expérience ?
-	Nous avons décidé de recommencer sur une base saine.
+	Nous avons décidé de recommencer sur une base saine le projet Android.
 ##Mémo
 	L'application Android est définitivement inutilisable. 
 
