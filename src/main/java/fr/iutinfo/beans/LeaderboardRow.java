@@ -5,10 +5,13 @@ public class LeaderboardRow {
 	private int countLevel;
 	private int idUser;
 	
+	public LeaderboardRow(){}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
+		System.out.println("setName");
 		this.name = name;
 	}
 	public int getCountLevel() {
@@ -21,6 +24,7 @@ public class LeaderboardRow {
 		return idUser;
 	}
 	public void setIdUser(int idUser) {
+		System.out.println("setIdUser");
 		this.idUser = idUser;
 	}
 }

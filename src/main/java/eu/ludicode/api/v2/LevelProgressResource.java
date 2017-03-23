@@ -34,7 +34,6 @@ public class LevelProgressResource {
 	@POST
 	@Path("/putProgress/{cookie}/{idLevel}")
 	public Feedback putProgress(@PathParam("cookie") String cookie, @PathParam("idLevel") int idLevel) {
-		/*
 		if (!Session.isLogged(cookie))
 			return new Feedback(false, "Vous devez être connecte !");
 		
@@ -45,30 +44,26 @@ public class LevelProgressResource {
 		
 		dao.insert(idUser, idLevel);
 		
-		return new Feedback(true, "OK");*/
-		return null;
+		return new Feedback(true, "OK");
 	}
 	
 	@GET
 	@Path("/me/{cookie}")
 	public List<LevelInfo> getLevelsDone(@PathParam("cookie") String cookie) {
-		/*if(Session.isLogged(cookie))
+		if(Session.isLogged(cookie))
 			return dao.getFinishedLevels(Session.getUser(cookie).getId());
-		throw new WebApplicationException(404);*/
-		return null;
+		throw new WebApplicationException(404);
 	}
 	
 	@GET
 	@Path("/{idUser}")
 	public List<LevelInfo> getLevelsDone(@PathParam("idUser") int idUser) {
-		//return dao.getFinishedLevels(idUser);
-		return null;
+		return dao.getFinishedLevels(idUser);
 	}
 	
 	@GET
 	@Path("/rankings")
 	public List<LeaderboardRow> getLeaderboard() {
-		//return dao.getLevelsCount();
-		return null;
+		return dao.getLevelsCount();
 	}	
 }

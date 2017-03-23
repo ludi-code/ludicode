@@ -5,9 +5,7 @@ public class LevelProgress {
 	private int idUser;
 	private int idLevel;
 	
-	public LevelProgress() {
-		
-	}
+	public LevelProgress() {}
 	
 	public LevelProgress(int idUser, int idLevel) {
 		super();
