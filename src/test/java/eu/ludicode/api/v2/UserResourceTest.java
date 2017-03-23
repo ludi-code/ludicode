@@ -84,4 +84,6 @@ public class UserResourceTest {
 
 		Assert.assertTrue(fb.isSuccess());
 	}
+	
+	
 }

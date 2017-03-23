@@ -12,7 +12,11 @@ import java.util.UUID;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
 
 
@@ -49,11 +53,19 @@ public class UserResource {
 		return fb;
     }
     
+    /**
+     * Lit tout les utilisateur
+     * @return liste d'utilisateur
+     */
     @GET
     public List<User> readAll() {
     	return userDao.getAll();
     }
     
+    /**
+     * trie les utilisateur
+     * @return liste triée
+     */
     @GET
 	@Path("/sortByName")
 	public List<User> getSortUsers() {
@@ -134,6 +146,11 @@ public class UserResource {
 		return new Feedback(true, "Mot de passe correct");
 	}
 	
+	/**
+	 * Connecte un utilisateur
+	 * @param user
+	 * @return
+	 */
 	@POST
 	@Path("/login")
 	public Feedback logUser(User user) {
@@ -160,5 +177,175 @@ public class UserResource {
 		Session.addUser(id.toString(), u);
 
 		return new Feedback(true, id.toString());
+	}
+	
+	/**
+	 * Vérifie si un utilisateur est connecté
+	 * @param cookie
+	 * @return
+	 */
+	@GET
+	@Path("/isLogged/{cookie}")
+	public Feedback isLogged(@PathParam("cookie") String cookie) {
+		if(Session.isLogged(cookie))
+			return new Feedback(true, "connected");
+		return new Feedback(false, "not connected");
+	}
+	
+	/**
+	 * Déconnecte l'utilisateur
+	 * @param cookie
+	 * @return
+	 */
+	@GET
+	@Path("/logout/{cookie}")
+	public Feedback logout(@PathParam("cookie") String cookie) {
+		Session.removeUser(cookie);
+		return new Feedback(true, "Vous avez bien été déconnecté");
+	}
+
+
+	/**
+	 * Return l'utilisateur avec comme id "id"
+	 * @param id
+	 * @return
+	 */
+	@GET
+	@Path("/{id}")
+	public User getUser(@PathParam("id") int id) {
+		return userDao.findById(id);
+	}
+
+
+	/**
+	 * Recherche un utilisateur d'id "cookie"
+	 * @param cookie
+	 * @return
+	 */
+	@GET
+	@Path("/me/{cookie}")
+	public User getUser(@PathParam("cookie") String cookie) {
+		return Session.getUser(cookie);
+	}
+
+
+	/**
+	 *  recherche tout les utilisateur contenant "term"
+	 * @param term
+	 * @return
+	 */
+	@GET
+	@Path("/search")
+	public List<User> searchUsers(@QueryParam("term") String term) {
+		return userDao.searchUsers(term + "%");
+	}
+
+	/**
+	 * Cherche l'utilisateur avec pour psedo "name"
+	 * @param name
+	 * @return
+	 */
+	@GET
+	@Path("/getId/{name}")
+	public User getId(@PathParam("name") String name) {
+		return  userDao.findByName(name);
+	}
+	
+	/**
+	 * Change la Date de dernière connection
+	 * @param cookie
+	 * @return
+	 */
+	@PUT
+	@Path("/updateNotifDate/{cookie}")
+	public Feedback updateNotifDate(@PathParam("cookie") String cookie) {
+		if(Session.isLogged(cookie)) {
+			userDao.updateNotifDate(Session.getUser(cookie).getId());
+			return new Feedback(true, "update done");
+		}
+		return new Feedback(false, "Vous n'êtes pas enregistré !");
+	}
+
+	/**
+	 * Permet de modifier son pseudo de l'utilisateur "cookie"
+	 * @param cookie
+	 * @param pseudo
+	 * @return
+	 */
+	@PUT
+	@Path("/updateName/{cookie}/{pseudo}")
+	public Feedback updatePseudo(@PathParam("cookie") String cookie, @PathParam("pseudo") String pseudo) {
+
+		if(Session.isLogged(cookie)) {
+
+			// Si le pseudo est valide on le met à jour
+			Feedback f = isNameValid(pseudo);
+			if (!f.isSuccess())
+				return f;
+
+			userDao.updateName(Session.getUser(cookie).getId(), pseudo);
+
+			return new Feedback(true, "Nom change !");
+		}
+
+		return new Feedback(false, "Vous n'êtes pas enregistre");
+	}
+
+	/**
+	 * Met à jour l'email de l'uilisateur "cookie"
+	 * @param cookie
+	 * @param email
+	 * @return
+	 */
+	@PUT
+	@Path("/updateEmail/{cookie}/{email}")
+	public Feedback updateEmail(@PathParam("cookie") String cookie, @PathParam("email") String email) {
+
+
+		if (Session.isLogged(cookie)) {
+			Feedback f = isMailValid(email);
+
+			if (!f.isSuccess())
+				return f;
+
+			userDao.updateEmail(Session.getUser(cookie).getId(), email);
+			return new Feedback(true, "Email change !");
+
+		}
+
+		return new Feedback(false, "Vous n'êtes pas enregistre");
+	}
+
+	/**
+	 * Met à jour le mot de passe de l'uilisateur "cookie"
+	 * @param cookie
+	 * @param oldPassword
+	 * @param password
+	 * @return
+	 */
+	@PUT
+	@Path("/updatePassword/{cookie}/{oldPassword}/{newPassword}")
+	public Feedback updatePassword(@PathParam("cookie") String cookie, @PathParam("oldPassword") String oldPassword, @PathParam("newPassword") String password) {
+
+		if(Session.isLogged(cookie)) {
+			User u;
+			u = userDao.userIsCorrect(Session.getUser(cookie).getName(), Utils.hashMD5(oldPassword));
+			
+			if ( u == null ) {
+				return new Feedback(false, "L'ancien mot de passe est invalide !");
+			}
+			
+			String hashedPassword = Utils.hashMD5(password);
+			Feedback f = isPasswordValid(hashedPassword);
+			if (!f.isSuccess())
+				return f;
+
+			userDao.updatePassword(Session.getUser(cookie).getId(), hashedPassword);
+			return new Feedback(true, "Mot de passe change !");
+
+
+		}
+
+		return new Feedback(false, "Vous n'êtes pas enregistre");
 	}
 }
