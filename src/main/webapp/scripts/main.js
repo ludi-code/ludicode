@@ -225,11 +225,11 @@ function executeCartes(){
 			y ++;
 		if(imgs[i].id == "up")
 			y --;
-		game.gplayer.moveToTile(x,y);
-		/*if(x <0 || y <0 || x >5 || y>6)
-			alert("sorti !");
-		if(game.tiles[y][x]==1 ) alert("mur ! "+x+","+y);
-		if(game.tiles[y][x]==3 ) alert("gagné");*/
+        if(x <0 || y <0 || x >5 || y>6)
+			game.gplayer.showMessage("Collision avec un mur !");
+		else if(game.tiles[y][x]==1 ) alert("mur ! "+x+","+y);
+		else if(game.tiles[y][x]==3 ) alert("gagné");
+        else game.gplayer.moveToTile(x,y);
 	}
 }
 

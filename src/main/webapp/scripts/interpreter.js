@@ -58,7 +58,7 @@ define(["jquery"], function (require) {
          */
         this.resetBlocksColour = function () {
             if (!Blockly)
-                return;
+              return;
             // Resets all the colors
             for (var i = 0; i < Blockly.mainWorkspace.getAllBlocks().length; ++i) {
                 var b = Blockly.mainWorkspace.getAllBlocks()[i];
