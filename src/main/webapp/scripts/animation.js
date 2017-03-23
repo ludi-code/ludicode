@@ -13,7 +13,7 @@ define(["jquery"], function (require) {
         if (imagePath.src) {
             this.image = imagePath;
             this.loaded = true;
-        } else {
+        }else {
             this.image = new Image();
             this.image.src = imagePath;
             this.loaded = false;
