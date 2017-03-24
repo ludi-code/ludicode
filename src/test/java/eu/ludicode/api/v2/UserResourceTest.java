@@ -1,20 +1,19 @@
 package eu.ludicode.api.v2;
 
-import fr.iutinfo.BDDFactory;
-import fr.iutinfo.beans.User;
-import fr.iutinfo.dao.UserDao;
-
 import java.util.List;
 
-import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import eu.ludicode.api.dto.Feedback;
+import fr.iutinfo.BDDFactory;
+import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
+import fr.iutinfo.dao.UserDao;
 
 public class UserResourceTest {
-	@Before
+	/*@Before
 	public void initTableUser() {
 		UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
 		userDao.dropUserTable();
@@ -43,7 +42,7 @@ public class UserResourceTest {
 		userDao.insert(user);
 		
 		UserResource userRessource = new UserResource();
-		List<User> users = userRessource.readAll();
+		List<User2> users = userRessource.readAll();
 		
 		Assert.assertEquals(1, users.size());
 	}
@@ -61,13 +60,13 @@ public class UserResourceTest {
 		userDao.insert(user2);
 		
 		UserResource userRessource = new UserResource();
-		List<User> users = userRessource.getSortUsers();
+		List<User2> users = userRessource.getSortUsers();
 		
 		Assert.assertEquals("Alf", users.get(0).getName());
 		Assert.assertEquals("Napoleon", users.get(1).getName());
 	}
 	
-	/*@Test
+	@Test
 	public void test_connection_utilisateur(){
 		User user = new User();
 		user.setEmail("email@test.com");
