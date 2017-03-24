@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="fr">
+ <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,8 +8,7 @@
         <meta name="author" content="">
 
         <title>Ludicode</title>
-
-        <!-- bootstrap -->
+          <!-- bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/bootstrap-toggle.min.css">
@@ -24,8 +23,20 @@
         <script type="text/javascript"
         src="scripts/page_controllers/register.js"></script>
 
-    </head>
+<script type="text/javascript">
+					//regarder quand la case prof et cochée ou non.
 
+					function gBox(nbCheck){
+   					 if(document.getElementById('checkbox').checked == true){
+   					 	console.log("la case est cochée");
+                         $(".form-mail").show();                                                                                                              				 }
+                         else{
+   							console.log("La case n'est pas cochée");
+                             $(".form-mail").hide();
+                            }
+                    }
+					</script>
+    </head>
     <body>
         <div id="fb-root"></div>
         <nav class="navbar navbar-inverse">
@@ -55,12 +66,9 @@
                         <li class="menu_bar_element" id="leaderboard_bar"><a
                                 href="leaderboard.html">Classement</a></li>
                         <li class="menu_bar_element" id="groupes_bar"><a href="groupes.html">Groupes</a></li>
-                        <li class="menu_bar_element" id="stat_bar"><a href="statistiques.html">Statistiques</a></li>
                         <li class="menu_bar_element" id="video_bar"><a href="videos.html">Vidéos</a></li>
-
-                    </ul>
-
-                    <div class="navbar-form navbar-right">
+                        </ul>
+						<div class="navbar-form navbar-right">
                         <div id="login_navbar">
                             <div class="form-group">
                                 <input id="name_login" type="text" placeholder="Pseudo"
@@ -93,25 +101,32 @@
             </div>
         </nav>
 
-
         <div class="container main_panel" id="register_pane">
             <div class="row">
                 <div class="form col-md-offset-3 col-md-6">
                     <div id="error" class="alert alert-danger"></div>
-                    <div class="form-group">
-                        <label for="name_register">Pseudo : </label> <input type="text"
-                                                                            class="form-control" id="name_register" placeholder="Votre pseudo" />
-                    </div>
+                  
 
                     <div class="form-group">
-                        <label for="email_register">Adresse Email</label> <input
-                            type="text" class="form-control" id="email_register"
-                            placeholder="Votre email" />
+                        <label for="name_register">Pseudo : </label> <input type="text"
+						class="form-control" id="name_register" placeholder="Votre pseudo" />
+
                     </div>
-                    <div class="form-group">
+
+					<div class="form-group">
                         <label for="password_register">Mot de passe : </label> <input
                             type="password" class="form-control" id="password_register"
                             placeholder="Votre mot de passe" />
+                    </div>
+                    <div class="checkbox">
+                         <label for="box_teacher"></label> <input onclick="gBox(this)" 
+                     type="checkbox"  id="checkbox" value="">Si vous êtes enseignant, veuillez cocher la case.
+                    </div>
+
+                        <div class="form-mail" style="display:none">
+                        <label for="email_register">Adresse Email</label> <input
+                            type="text" class="form-control" id="email_register"
+                            placeholder="Votre email"/>
                     </div>
 
                     <button id="button_register" type="button" class="btn btn-default"
@@ -130,4 +145,4 @@
         </footer>
     </body>
 </html>
-
+                      
