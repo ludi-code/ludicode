@@ -67,7 +67,6 @@ function saveLevel() {
         gridHeight = parseInt(window.sessionStorage.height);
         initGrid(gridWidth, gridHeight);
         parseSessionLevel();
-
         sendLevel();
     }
     else

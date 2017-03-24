@@ -1,0 +1,20 @@
+##rétrospective de sprint
+Nom du master scrum du sprint 8: François Morel
+
+##Ce que nous avons fait durant ces sprints:
+	Mise en place d'une authentification sur la 2eme version du serveur : celui-ci reconnait un éléve d'un enseignant
+	Ajout de documentation pour du code javascript (notamment celles concernant les niveaux par cartes)
+	Création d'une base de menu sur l'application Android
+	Création d'un nouveau niveau "Tortue" fonctionnel
+
+##Ce que nous allons faire durant les prochains sprints:
+    Permettre à l'enseignant de créer ses propres niveaux tortues
+    Adapter le site en fonction du statut de l'utilisateur connecté
+    Continuer d'ajouter de la documentation (pour des possibles futurs développeurs)
+    Continuer l'application Android
+##qu'avons nous observé ?
+    Apparition de multiples bugs : impossible de créer un utilisateur en local et sur la premiere version du serveur
+###Qu'elle décision prenons nous suite à cette expérience ?
+    Continuer à travailler
+##Mémo
+  Rien

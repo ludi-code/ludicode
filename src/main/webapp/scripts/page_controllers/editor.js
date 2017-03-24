@@ -340,8 +340,6 @@ function saveLevel() {
     var validity = checkLevel();
 
     if (validity) {
-        var structuredContent = [];
-
         var level_type = $("#levelTypes").val().toLowerCase();
         sessionStorage.levelType = level_type;
 
@@ -353,12 +351,10 @@ function saveLevel() {
         sessionStorage.width = gridWidth;
         sessionStorage.height = gridHeight;
         sessionStorage.list = $('#levelList').val();
-
-
         setTimeout(function () {
             window.location.assign("/test_" + level_type + ".html");
         }, 50);
-
+        
     }
     else
         alert("Niveau invalide");
