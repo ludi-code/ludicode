@@ -46,13 +46,8 @@ var Cookies = {
         }
         else
             var expires = "";
-        if (role === "student" || role === "teacher")
-            var roleCookie = "; role=" + role;
-        else
-            var roleCookie ="";
-        document.cookie = name + "=" + value + expires + roleCookie + "; path=/";
+        document.cookie = name + "=" + value + expires + "; path=/";
         this[name] = value;
-        this["role"] = role;
     },
     
     erase: function (name) {
@@ -141,8 +136,10 @@ function loginUser(name, password, redirect_url) {
         success: function (data, textStatus, jqXHR) {
             if (data.success) {
                 // data.message contain uniq id for session
-                // ajoute un cookie avec un id unique pour l'utilisateur ainsi que son role (teacher/student)
-                Cookies.create("id", data.message, -1, data.role);
+                // ajoute un cookie avec un id unique pour l'utilisateur
+                Cookies.create("id", data.message);
+                // ajoute un cookie avec le role de l'utilisateur (teacher/student)
+                Cookies.create("role", data.role);
                 setConnected(true);
                 if (redirect_url)
                     location.replace(redirect_url);
@@ -167,7 +164,7 @@ function loginUser(name, password, redirect_url) {
  * @returns {undefined}
  */
 function getNotifCount() {
-    $.getJSON("v1/levels/notifs/count/" + Cookies["id"], function (data) {
+    $.getJSON("v2/levels/notifs/count/" + Cookies["id"], function (data) {
         if (data.notifCount > 0)
             $("#notif_icon").append('<span id="notif-count" class="badge">' + data.notifCount + '</span>');
     });
@@ -180,14 +177,20 @@ function getNotifCount() {
 function setConnected(connected) {
     sessionStorage.setItem("isConnected", connected);
     if (sessionStorage.getItem("isConnected") == "true") {
+        if(Cookies["role"] === "teacher") {
+            $("#editor_bar").show();
+            $("#groupes_bar").show();
+        }
         $("#login_navbar").hide();
         $("#info_profil_navbar").show();
-        $("#editor_bar").show();
+        $("#stat_bar").show();
         getNotifCount();
     } else {
         $("#editor_bar").hide();
         $("#info_profil_navbar").hide();
         $("#login_navbar").show();
+        $("#stat_bar").hide();
+        $("#groupes_bar").hide();
         if (isLoginRequiredPage())
             location.replace("/");
     }
@@ -201,7 +204,7 @@ function updateNotifDate() {
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
-        url: "v1/users/updateNotifDate/" + Cookies["id"],
+        url: "v2/users/updateNotifDate/" + Cookies["id"],
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             console.log(data);
@@ -222,7 +225,7 @@ function handleKeyPress(e) {
 var popoverNotifShow = false;
 function getNewNotifs() {
     if (!popoverNotifShow) {
-        $.getJSON("v1/levels/notifs/" + Cookies["id"], function (data) {
+        $.getJSON("v2/levels/notifs/" + Cookies["id"], function (data) {
             console.log(data);
             var htmlData = $('<ul class="list-group"></ul>');
             if (data.length > 0) {
@@ -253,7 +256,7 @@ function showProfile(userCookie) {
     $.ajax({
         type: 'GET',
         dataType: 'application/json',
-        url: 'v1/users/' + userCookie,
+        url: 'v2/users/' + userCookie,
         succes: function (json, statut) {
             console.log("DATA : " + json);
             var page = $("#profil_pane");
@@ -266,7 +269,7 @@ function logoutUser() {
     if (!Cookies["id"])
         setConnected(false);
     else
-        $.getJSON("v1/users/logout/" + Cookies["id"], function (data) {
+        $.getJSON("v2/users/logout/" + Cookies["id"], function (data) {
             console.log(data);
             setConnected(false);
             window.location.href = "/";
@@ -277,7 +280,7 @@ function checkConnection() {
     if (!Cookies["id"])
         setConnected(false);
     else
-        $.getJSON("v1/users/isLogged/" + Cookies["id"], function (data) {
+        $.getJSON("v2/users/isLogged/" + Cookies["id"], function (data) {
             setConnected(data.success);
         });
 }
