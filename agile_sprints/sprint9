@@ -1,0 +1,23 @@
+##rétrospective de sprint
+Nom du master scrum du sprint 9: François Morel
+
+##Ce que nous avons fait durant ces sprints:
+	Passage lent à la deuxieme version du serveur
+	Création des derniers niveaux "fixes" de Tortue
+	Avancement de l'application Android
+	Avancement dans un systeme d'authentification personnalité selon le role de l'utilisateur(enseignant ou eleve)
+	Fin de la documentation pour les fichiers Javascript
+
+##Ce que nous allons faire durant les prochains sprints:
+    Finir la deuxieme version du serveur, afin de l'exploiter
+    Mettre en place un systeme de réinitialisation du code pour les jeux Tortue
+    Mettre en place un éditeur pour les jeux Tortue
+    Continuer l'application Android
+##qu'avons nous observé ?
+    Probleme : nous n'avons pas forcement été capable de travailler autant que nous le voulions car le changement
+    de la base de données (pour qu'elle corresponde mieux à la vision du porteur de projet) a rendu inutilisable tout
+    les outils de la premiere version du serveur  qui nécéssitait un accès à la dite-base
+###Quelle décision prenons nous suite à cette expérience ?
+    Continuer à travailler et finaliser au plus vite la deuxieme version du serveur
+##Mémo
+  Rien
