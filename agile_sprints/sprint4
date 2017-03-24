@@ -2,13 +2,22 @@
 Nom du master scrum du sprint 4: Quentin Beaudoul
 
 ##Ce que nous avons fait durant ces sprints:
-    Nous avons fini les tests. Nous nous somme aussi penché sur le JavaScript. De coté de l'application Android, nous avons fini le XML de l'ecran de login.
+
+	Pendant le sprint 3, nous avons fait les taches suivants:
+		-UserRessources test
+		-Le XML de l'activité login
+		-Le README du sprint 2
+		-Profile info Ressources
+		-Intervention DAO
+		-LevelList Ressources Test
+	Nous avons, pour résumer, fait des tests et recommencer l'application android.
 
 ##Ce que nous allons faire durant les prochains sprints:
-    Nous continuons à essayer de comprendre le JavaScript. L'objectif est aussi de connecter l'application à la base de donnée.
+	Continuer à faire des tests, faire la programmation par carte et la tortue.
 ##qu'avons nous observé ?
-    Beaucoup de cohésion de groupe. On avance bien sur la compréhension du JavaScript
+	L'application Android n'est pas au point du tout.
 ###Qu'elle décision prenons nous suite à cette expérience ?
-    Continuer dans la même lancée
+	Nous avons décidé de recommencer sur une base saine le projet Android.
 ##Mémo
-  Rien
+	L'application Android est définitivement inutilisable. 
+
