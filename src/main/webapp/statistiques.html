@@ -19,9 +19,10 @@
 
 <!-- Code local -->
 <script type="text/javascript" src="libs/jquery.js"></script>
+<script type="text/javascript" src="libs/bootstrap.js"></script>
 <script type="text/javascript" src="libs/bootstrap-toggle.min.js"></script>
 <script type="text/javascript" src="scripts/page_controllers/all.js"></script>
-
+<script type="text/javascript" src="scripts/page_controllers/index.js"></script>
 
 </head>
 
@@ -46,6 +47,8 @@
 					<li class="menu_bar_element" id="levels_bar"><a href="levels.html">Jouer</a></li>
 					<li class="menu_bar_element" id="levels_bar"><a href="dessin.html">Dessiner</a></li>
 					<li class="menu_bar_element" id="editor_bar"><a href="editor.html">Editeur</a></li>
+					<li class="menu_bar_element" id="ludidoc_bar"><a
+						href="ludidoc.html">Ludidoc</a></li>
 					<li class="menu_bar_element" id="leaderboard_bar"><a href="leaderboard.html">Classement</a></li>
 					<li class="menu_bar_element" id="groupes_bar"><a href="groupes.html">Groupes</a></li>
                     <li class="menu_bar_element" id="stat_bar"><a href="statistiques.html">Statistiques</a></li>
@@ -67,20 +70,16 @@
 						</div>
 					</div>
 					<div id="info_profil_navbar">
-						<a id="user_icon" href="profile.html" class="menu_bar_element">
+						<a id="user_icon" href="profile.html" class="menu_bar_element" data-toogle="tooltip" title="Mon profil">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-						</a>
-						<a href="chat.html">
-							<span class="glyphicon glyphicon-comment" aria-hidden="true"> </span>
-						</a> 
-						<a id="notif_icon" href="#">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						</a>
-						<a id="options_icon" class="menu_bar_element" href="options.html">
+						</a> <a href="chat.html" data-toogle="tooltip" title="Mes messages"> <span class="glyphicon glyphicon-comment"
+							aria-hidden="true"> </span>
+						</a> <a id="notif_icon" href="#" data-toogle="tooltip" data-title="Mes notifications"> <span
+							class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						</a> <a id="options_icon" class="menu_bar_element" href="options.html" data-toogle="tooltip" title="Paramètres">
 							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-						</a>
-						<a id="logout_icon" href="#"> 
-							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+						</a> <a id="logout_icon" href="#" data-toogle="tooltip" title="Deconnéxion"> <span
+							class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>
 				</div>
@@ -90,14 +89,11 @@
 	</nav>
 
 
-	<div class="container main_panel" id="your_pane">
-		<div class="row">
-			
-		</div>
+	<div class="container main_panel" id="home_pane">
+		
 	</div>
-	<!-- container your page -->
-
-
+	<!-- container home page -->
+	
 	<footer class="container">
 		<div class="row">
 			<hr />
