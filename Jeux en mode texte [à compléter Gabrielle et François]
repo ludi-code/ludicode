@@ -1,0 +1,28 @@
+Type: Carte
+Instructions: N,S,E,O
+Explications:
+Trouver le chemin 
+Board:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,O,-,-
+-,-,-,X,X,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,H,-,X,-,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max-instructions: 9
+Solutions:
+NNNEEEEEEE
+---------------------
+Type: Blockly
+[à compléter]
+---------------------
+Type: Python
+Context: Turtle
+Instructions: avancer, reculer, for_3, if_chemin_droite
+Explications:
+
+Code_solution:
+import turtle
+[à compléter]
