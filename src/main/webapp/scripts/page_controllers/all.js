@@ -3,14 +3,15 @@
  */
 function isLoginRequiredPage() {
     var page = location.pathname;
-    return page == "/options.html"
-            || page == "/profile.html"
-            || page == "/editor.html"
-            || page == "/chat.html"
-            || page == "listsEditor.html"
-            || page == "test.html"
-            || page == "instructionsSelection.html"
-
+    return page === "/options.html"
+            || page === "/profile.html"
+            || page === "/statistiques.html"
+            || page === "/groupes.html"
+            || page === "/editor.html"
+            || page === "/chat.html"
+            || page === "listsEditor.html"
+            || page === "test.html"
+            || page === "instructionsSelection.html";
 }
 
 /**
@@ -18,7 +19,7 @@ function isLoginRequiredPage() {
  */
 function urlParam(name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results == null) {
+    if (results === null) {
         return null;
     } else {
         return results[1] || 0;
@@ -37,7 +38,7 @@ var Cookies = {
             this[cookiePair[0]] = cookiePair[1];
         }
     },
-    create: function (name, value, days) {
+    create: function (name, value, days, role) {
         if (days) {
             var date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -45,9 +46,15 @@ var Cookies = {
         }
         else
             var expires = "";
-        document.cookie = name + "=" + value + expires + "; path=/";
+        if (role === "student" || role === "teacher")
+            var roleCookie = "; role=" + role;
+        else
+            var roleCookie ="";
+        document.cookie = name + "=" + value + expires + roleCookie + "; path=/";
         this[name] = value;
+        this["role"] = role;
     },
+    
     erase: function (name) {
         this.create(name, '', -1);
         this[name] = undefined;
@@ -134,7 +141,8 @@ function loginUser(name, password, redirect_url) {
         success: function (data, textStatus, jqXHR) {
             if (data.success) {
                 // data.message contain uniq id for session
-                Cookies.create("id", data.message);
+                // ajoute un cookie avec un id unique pour l'utilisateur ainsi que son role (teacher/student)
+                Cookies.create("id", data.message, -1, data.role);
                 setConnected(true);
                 if (redirect_url)
                     location.replace(redirect_url);
