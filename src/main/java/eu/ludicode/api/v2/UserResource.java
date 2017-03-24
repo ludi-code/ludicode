@@ -2,6 +2,7 @@ package eu.ludicode.api.v2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,11 +13,13 @@ import javax.ws.rs.QueryParam;
 
 import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.BDDFactory;
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.Student;
+import fr.iutinfo.beans.Teacher;
 import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.StudentDao;
 import fr.iutinfo.dao.TeacherDao;
 import fr.iutinfo.utils.Session;
+import fr.iutinfo.utils.Utils;
 
 /**
  * Classe permettant de gérer le fait que l'utilisateur soit un professeur ou un élève.
@@ -36,9 +39,14 @@ public class UserResource {
 	 */
     @POST
     @Path("/register")
-    public Feedback createUser(User user) {
-    	//TODO
-		return new Feedback();
+    public Feedback createUser(User2 user) {
+    	Feedback fb = null;
+		/*if(user instanceof Teacher) {
+			fb = new TeacherResource().createTeacher((Teacher)user);
+		} else {
+			fb = new StudentResource().createStudent((Student)user);
+		}*/
+		return fb;
     }
 
 	/**
@@ -49,8 +57,24 @@ public class UserResource {
 	@POST
 	@Path("/login")
 	public Feedback logUser(User2 user) {
-		//TODO
-		return new Feedback();
+		String hashedPassword = Utils.hashMD5(user.getPassword());
+		if (hashedPassword == null)
+			return new Feedback(false, "An error occurs during hashing");		
+		Feedback fb = null;
+		if(teacherDao.teacherIsCorrect(user.getName(), hashedPassword) != null) {
+			Teacher t = new Teacher();
+			t.setName(user.getName());
+			t.setPassword(hashedPassword);
+			fb = new TeacherResource().logTeacher(t);
+		} else if(studentDao.studentIsCorrect(user.getName(), hashedPassword) != null) {
+			Student s = new Student();
+			s.setName(user.getName());
+			s.setPassword(hashedPassword);
+			fb = new StudentResource().logStudent(s);
+		} else {
+			return new Feedback(false, "L'utilisateur n'existe pas.");
+		}
+		return fb;
 	}
     
     /**

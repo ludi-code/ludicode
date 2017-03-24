@@ -138,10 +138,10 @@ public class StudentResource {
 	@POST
 	@Path("/login")
 	public Feedback logStudent(Student student) {
-		String hashedPassword = Utils.hashMD5(student.getPassword());
+		/*String hashedPassword = Utils.hashMD5(student.getPassword());
 		if (hashedPassword == null)
 			return new Feedback(false, "An error occurs during hashing");
-		student.setPassword(hashedPassword);
+		student.setPassword(hashedPassword);*/
 		Student s = null;
 		try {
 			s = studentDao.studentIsCorrect(student.getName(), student.getPassword());

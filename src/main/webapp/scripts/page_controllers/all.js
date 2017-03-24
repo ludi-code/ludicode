@@ -124,7 +124,7 @@ function loginUser(name, password, redirect_url) {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: "v1/users/login",
+        url: "v2/users/login",
         dataType: "json",
         data: JSON.stringify({
             "id": 0,

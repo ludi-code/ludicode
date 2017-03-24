@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 public class DbResetResource {
 
     private static FriendsRelationsDao friendDao = BDDFactory.getDbi().open(FriendsRelationsDao.class);
-    //private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+    private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
     private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
     private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
     private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
@@ -50,7 +50,7 @@ public class DbResetResource {
     @Path("all")
     public String resetDatabase() {
 
-        //resetDbUsers();
+        resetDbUsers();
     	resetDbTeachers();
     	resetDbStudents();
         resetDbInstructions();
@@ -63,7 +63,7 @@ public class DbResetResource {
         return "All Tables Reset";
     }
 
-    /*@GET
+    @GET
     @Path("users")
     public String resetDbUsers() {
         userDao.dropUserTable();
@@ -74,14 +74,14 @@ public class DbResetResource {
         userDao.insert(new User("tata", Utils.hashMD5("tata"), "tata@tata.ta"));
 
         return "Table user Reset";
-    }*/
+    }
     
     @Path("teachers")
     public String resetDbTeachers() {
     	teacherDao.dropTeacherTable();
     	teacherDao.createTeacherTable();
     	
-    	teacherDao.insert(new Teacher("Totoro", "Totoro", "totoro@totoro.to"));
+    	teacherDao.insert(new Teacher("totoro", Utils.hashMD5("totoro"), "totoro@totoro.to"));
     	
     	return "Table teachers reset";
     }

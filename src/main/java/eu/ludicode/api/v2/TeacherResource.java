@@ -164,10 +164,10 @@ public class TeacherResource {
 	@POST
 	@Path("/login")
 	public Feedback logTeacher(Teacher teacher) {
-		String hashedPassword = Utils.hashMD5(teacher.getPassword());
+		/*String hashedPassword = Utils.hashMD5(teacher.getPassword());
 		if (hashedPassword == null)
 			return new Feedback(false, "An error occurs during hashing");
-		teacher.setPassword(hashedPassword);
+		teacher.setPassword(hashedPassword);*/
 		Teacher t = null;
 		try {
 			t = teacherDao.teacherIsCorrect(teacher.getName(), teacher.getPassword());

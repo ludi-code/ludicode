@@ -6,12 +6,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import eu.ludicode.api.v2.LevelResource;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.LeaderboardRow;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.LevelInfo;
 import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelProgressDao;
 import fr.iutinfo.dao.UserDao;
@@ -41,7 +41,7 @@ public class LevelProgressResourceTest {
 	@Test
 	public void progress_must_be_found() {
 		LevelProgressResource levelProgressResource = new LevelProgressResource();
-		new UserResource().createUser(new User("Georges", "1234", "email@email.fr"));
+		new UserResource().createUser(new User2("Georges", "1234"));
 		levelDao.insert("Level", "", "", 0, 0, "", true);
 		levelProgressDao.insert(1, 1);
 		LevelInfo info = new LevelInfo();
@@ -56,8 +56,8 @@ public class LevelProgressResourceTest {
 	public void progress_must_not_be_found() {
 		LevelProgressResource levelProgressResource = new LevelProgressResource();
 		UserResource ur = new UserResource();
-		ur.createUser(new User("Georges", "1234", "email@email.fr"));
-		ur.createUser(new User("Edward", "7895", "email@blabla.fr"));
+		ur.createUser(new User2("Georges", "1234"));
+		ur.createUser(new User2("Edward", "7895"));
 		new LevelResource().createLevel(new Level(), "");
 		levelProgressDao.insert(1, 1);
 		Assert.assertEquals(levelProgressResource.getLevelsDone(2).size(), 0);
