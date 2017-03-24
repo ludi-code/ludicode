@@ -4,19 +4,35 @@ main.js			un peu de tout
 			initialise les options de jeu (theme, vitesse
 			gestion de la taille de la fenetre du navigateur
 			gestion du theme de jeu et de la vitesse de deplacement
+			fonction permettant d'executer l'algo du joueur
 animation.js		represente une animation en fonction d'une image
 block_creator.js	cree un block
 carte_creator.js	cree une carte
-game.js
+game.js			recupere le parametrage de l'utilisateur
 graphical_player	permet de representer le joueur graphiquement
 grid.js 		permet de representer la grille d'un niveau
 interpreter.js		permet d'interpreter les blocs d'instructions en instructions
 interpreterCarte.js     idem -> donc supprime
 player.js		gere les deplacements du personnage
-theme.js
+theme.js		permet de gerer le theme
 
 FICHIERS JS PRENSENTS DANS page_controllers
 
-all.js		liste toutes les pages necessitant d'etre logué
-editor.js
+all.js			liste toutes les pages necessitant d'etre logué
+			gere les connections, les cookies, 
+editor.js       	gere l'editeur de niveau, l'enregistrement de celui ci
+game.js			gere les niveaux deja créés, la progression de l'utilisateur et le renvoi au prochain level 
+game_test.js		gere l'essai d'un niveau créé
+game_test_cartes.js	idem game_test.js mais pour les cartes
+group.js		gere les groupes
+index.js 		document vide
+instruction_controller.js	gere le css
+leaderboard.js		gestion de la page classement
+levels.js 		???
+listsEditor.js 		gestion des listes
+ludidoc.js		Useless : ludidoc.html is an emty html page
+option.js		permet les modifications dans le profil de l'utilisateur (mdp, mail..)
+profile.js		gere la page du profil
+register.js		gere la page d'enregistrement
+websocket_client.js	gestion du chat
 
