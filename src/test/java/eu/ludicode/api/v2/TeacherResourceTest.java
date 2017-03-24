@@ -12,12 +12,15 @@ import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Teacher;
 import fr.iutinfo.dao.TeacherDao;
+import fr.iutinfo.utils.Utils;
 
 public class TeacherResourceTest {
+	
+	TeacherDao teacherDao ;
 
 	@Before
 	public void initTableTeacher() {
-		TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
+		teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
 		teacherDao.dropTeacherTable();
 		teacherDao.createTeacherTable();
 	}
@@ -73,15 +76,12 @@ public class TeacherResourceTest {
 		Teacher teacher = new Teacher();
 		teacher.setEmail("email@test.com");
 		teacher.setName("Napoleon");
-		teacher.setPassword("coucou");
+		teacher.setPassword(Utils.hashMD5("mdp"));
 
-		TeacherResource teacherRessource = new TeacherResource();
-		teacherRessource.createTeacher(teacher);
+		teacherDao.insert(teacher);
 		
-		Teacher teacher2 = new Teacher();
-		teacher2.setName("Napoleon");
-		teacher2.setPassword("coucou");
-		Feedback fb=teacherRessource.logTeacher(teacher2);
+		TeacherResource teacherRessource = new TeacherResource();
+		Feedback fb=teacherRessource.logTeacher(teacher);
 
 		Assert.assertTrue(fb.isSuccess());
 	}

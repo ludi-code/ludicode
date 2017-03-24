@@ -12,12 +12,15 @@ import fr.iutinfo.beans.Student;
 import fr.iutinfo.beans.Teacher;
 import fr.iutinfo.dao.StudentDao;
 import fr.iutinfo.dao.TeacherDao;
+import fr.iutinfo.utils.Utils;
 
 public class StudentResourceTest {
+	
+	StudentDao studentDao;
 
 	@Before
 	public void initTableStudent() {
-		StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
+		studentDao = BDDFactory.getDbi().open(StudentDao.class);
 		studentDao.dropStudentTable();
 		studentDao.createStudentTable();
 
@@ -97,15 +100,12 @@ public class StudentResourceTest {
 	public void test_connection_utilisateur(){
 		Student student = new Student();
 		student.setName("Napoleon");
-		student.setPassword("coucou");
+		student.setPassword(Utils.hashMD5("coucou"));
 
-		StudentResource studentRessource = new StudentResource();
-		studentRessource.createStudent(student);
+		studentDao.insert(student);
 		
-		Student student2 = new Student();
-		student2.setName("Napoleon");
-		student2.setPassword("coucou");
-		Feedback fb=studentRessource.logStudent(student2);
+		StudentResource studentRessource = new StudentResource();
+		Feedback fb=studentRessource.logStudent(student);
 
 		Assert.assertTrue(fb.isSuccess());
 	}
