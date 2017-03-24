@@ -96,7 +96,7 @@ public class TeacherResource {
 		if (!f.isSuccess())
 			return f;
 
-		return new Feedback(true, "Register OK");
+		return new Feedback(true, "Register OK", "teacher");
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class TeacherResource {
 			return new Feedback(false, "Le pseudo est déjà utilisé");
 		}
 
-		return new Feedback(true, "Pseudo valide et disponible");
+		return new Feedback(true, "Pseudo valide et disponible", "teacher");
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class TeacherResource {
 			return new Feedback(false, "L'adresse email est déjà utilisée");
 		}
 
-		return new Feedback(true, "Mail valide et disponible");
+		return new Feedback(true, "Mail valide et disponible", "teacher");
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class TeacherResource {
 			return new Feedback(false, "Le mot de passe doit faire au moins 6 caractères !");
 		}
 
-		return new Feedback(true, "Mot de passe correct");
+		return new Feedback(true, "Mot de passe correct", "teacher");
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class TeacherResource {
 		// add to logged teachers
 		Session.addUser(id.toString(), t);
 
-		return new Feedback(true, id.toString());
+		return new Feedback(true, id.toString(), "teacher");
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class TeacherResource {
 	@Path("/isLogged/{cookie}")
 	public Feedback isLogged(@PathParam("cookie") String cookie) {
 		if (Session.isLogged(cookie))
-			return new Feedback(true, "connected");
+			return new Feedback(true, "connected", "teacher");
 		return new Feedback(false, "not connected");
 	}
 
@@ -213,7 +213,7 @@ public class TeacherResource {
 	@Path("/logout/{cookie}")
 	public Feedback logout(@PathParam("cookie") String cookie) {
 		Session.removeUser(cookie);
-		return new Feedback(true, "Vous avez bien été déconnecté");
+		return new Feedback(true, "Vous avez bien été déconnecté", "teacher");
 	}
 
 	/**
@@ -278,7 +278,7 @@ public class TeacherResource {
 	public Feedback updateNotifDate(@PathParam("cookie") String cookie) {
 		if (Session.isLogged(cookie)) {
 			teacherDao.updateNotifDate(getTeacher(cookie).getId());
-			return new Feedback(true, "update done");
+			return new Feedback(true, "update done", "teacher");
 		}
 		return new Feedback(false, "Vous n'êtes pas enregistré !");
 	}
@@ -303,7 +303,7 @@ public class TeacherResource {
 
 			teacherDao.updateName(getTeacher(cookie).getId(), pseudo);
 
-			return new Feedback(true, "Nom change !");
+			return new Feedback(true, "Nom change !", "teacher");
 		}
 
 		return new Feedback(false, "Vous n'êtes pas enregistre");
@@ -327,7 +327,7 @@ public class TeacherResource {
 				return f;
 
 			teacherDao.updateEmail(getTeacher(cookie).getId(), email);
-			return new Feedback(true, "Email change !");
+			return new Feedback(true, "Email change !", "teacher");
 
 		}
 
@@ -361,7 +361,7 @@ public class TeacherResource {
 				return f;
 
 			teacherDao.updatePassword(getTeacher(cookie).getId(), hashedPassword);
-			return new Feedback(true, "Mot de passe change !");
+			return new Feedback(true, "Mot de passe change !", "teacher");
 		}
 
 		return new Feedback(false, "Vous n'êtes pas enregistre");
