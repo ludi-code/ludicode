@@ -1,7 +1,6 @@
 Type: Carte
-Instructions: N,S,E,O
-Explications:
-Trouver le chemin 
+Instructions: N,S,O,E
+Explications: Trouver le chemin 
 Board:
 -,-,-,-,-,-,-,-,-,-
 -,-,-,-,-,-,-,-,-,-
@@ -11,13 +10,26 @@ Board:
 -,H,-,X,-,-,-,-,-,-
 -,-,-,X,-,-,-,-,-,-
 -,-,-,-,-,-,-,-,-,-
-Max-instructions: 9
-Solutions:
-NNNEEEEEEE
+Max_instructions: 9
+Solutions: NNNEEEEEEE
 ---------------------
-Type: Blockly
-[à compléter]
----------------------
+Type: Block
+Instructions acceptes: up, down, turn_left, turn_right, for_3, if_down_else, if_left
+Explications: Atteigner la sortie
+Board:
+-,-,-,-,-,-,-,-,H,-
+-,-,-,X,X,X,X,X,X,X
+-,-,O,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max_instructions: 8
+Solutions: if_down_else(down, turn_right), for_3(up), for_3(up), turn_left, down, down
+/*---------------------
+Liste instructions disponibles pour Block: up, down, turn_left, turn_right, for_3, if_up, if_down, if_right, if_left, until_end, if_not_up, if_not_down, if_not_right, if_not_left, if_up_else, if_down_else, if_right_else, if_left_else, if_not_up_else, if_not_down_else, if_not_right_else, if_not_left_else
+---------------------*/
 Type: Python
 Context: Turtle
 Instructions: avancer, reculer, for_3, if_chemin_droite
