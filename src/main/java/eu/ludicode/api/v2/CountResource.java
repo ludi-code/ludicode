@@ -19,28 +19,47 @@ import fr.iutinfo.dao.TeacherDao;
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class CountResource {
 
-    private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
-    private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
-    private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
-    
-    public CountResource() {}
-	
-    @GET
-    @Path("/nbTeachers")
-    public int getNbTeachers() {
-    	return teacherDao.getCount();
-    }
-    
-    @GET
-    @Path("/nbStudents")
-    public int getNbStudents() {
-    	return studentDao.getCount();
-    }
-    
-    @GET
-    @Path("/nbLevels")
-    public int getNbLevels() {
-    	return levelDao.getCount();
-    }
+	private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
+	private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
+	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
+	private int numTeachers;
+	private int numStudents;
+	private int numLevels;
+
+	public CountResource(){
+		numTeachers = teacherDao.getCount();
+		numStudents = studentDao.getCount();
+		numLevels = levelDao.getCount();
+	}
+
+	@GET
+	@Path("/countResource")
+	public CountResource getCountResource() {
+		return new CountResource();
+	}
+
+	public int getNumTeachers() {
+		return numTeachers;
+	}
+
+	public void setNumTeachers(int numTeachers) {
+		this.numTeachers = numTeachers;
+	}
+
+	public int getNumStudents() {
+		return numStudents;
+	}
+
+	public void setNumStudents(int numStudents) {
+		this.numStudents = numStudents;
+	}
+
+	public int getNumLevels() {
+		return numLevels;
+	}
+
+	public void setNumLevels(int numLevels) {
+		this.numLevels = numLevels;
+	}
 
 }
