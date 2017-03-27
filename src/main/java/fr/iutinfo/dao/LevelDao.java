@@ -28,12 +28,12 @@ public interface LevelDao {
             + "content text, "
             + "instructions text, "
             + "maxInstructions integer, "
-            + "solution text"
+            + "solution text,"
             + "authorId integer, "
             + "creationDate DATETIME DEFAULT CURRENT_TIMESTAMP, "
             + "levelType char(10),"
-            + "orientation boolean DEFAULT TRUE)"
-            + "explication text DEFAULT 'Trouver le chemin'")
+            + "orientation boolean DEFAULT TRUE,"
+            + "explication text DEFAULT 'Trouver le chemin')")
     void createLevelsTable();
 
     //crée un niveau avec tout les information
