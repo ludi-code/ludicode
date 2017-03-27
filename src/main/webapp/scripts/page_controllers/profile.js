@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
     function doSearchClick() {
-        $.getJSON("/v1/users/getId/" + $("#search-friend").val(), function (data) {
+        $.getJSON("/v2/users/getId/" + $("#search-friend").val(), function (data) {
             location.replace("profile.html?id=" + data.id);
         });
     }
@@ -27,9 +27,9 @@ $(document).ready(function () {
         doSearchClick();
     });
 
-    $("#search-friend").autocomplete({
+    /*$("#search-friend").autocomplete({
         source: function (request, response) {
-            $.getJSON("/v1/users/search?term=" + $("#search-friend").val(), function (data) {
+            $.getJSON("/v2/users/search?term=" + $("#search-friend").val(), function (data) {
                 response($.map(data, function (value, key) {
                     return {
                         label: value.name
@@ -44,27 +44,41 @@ $(document).ready(function () {
                 .append('<img class="profil_picture_search" src="images/avatars/' + item.value + '.png" onerror="if (this.src != \'images/profil.png\') this.src = \'images/profil.png\';" /> ' + item.value)
                 .appendTo(ul);
     };
-    ;
+    ;*/
 
 
     function showProfileInfo(data, currentUserProfile) {
         //$("#info_player").html("");
-        $("#info_player").append("<b> Pseudo :</b> " + data.user.name + "<br>");
-        // Chargement de l'image de profil
-        $("#avatar").attr("src", "images/avatars/" + data.user.name + ".png");
+        var name;
+        $.getJSON("v2/" + Cookies["role"] + "s/me/" + Cookies["id"], function (data) {
+            if(Cookies["role"] === "student") {
+                name = data.name;
+                $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/><br/>");
+                // Chargement de l'image de profil
+                $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
+            } else if (Cookies["role"] === "teacher") {
+                $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/><br/>");
+                // Chargement de l'image de profil
+                $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
+            }
+        });
 
-        if (currentUserProfile)
-            $("#info_player").append("<b> Email :</b> " + data.user.email + "<br> <br>");
-        if (currentUserProfile)
-            $("#info_player").append("<a href='options.html'> Modifier mon profil </a>");
-        else
-            $("#info_player").append('<button id="add-friend" type="button" class="btn btn-primary">Ajouter en ami</button>');
+        if (currentUserProfile) {
+           if(Cookies["role"] === "teacher") {
+                $.getJSON("v2/teachers/getId" + name, function (data) {
+                    $("#info_player").append("<b> Email :</b> " + data.email + "<br/>");
+                });
+            }
+            $("#info_player").append("<a href='options.html'> Modifier mon profil </a> <br/>");
+        }
+        /*else
+            $("#info_player").append('<button id="add-friend" type="button" class="btn btn-primary">Ajouter en ami</button>');*/
 
-        $("#add-friend").click(function () {
-            $.getJSON("/v1/friends/addFriend/" + urlParam("id") + "/" + Cookies["id"], function (data) {
+        /*$("#add-friend").click(function () {
+            $.getJSON("/v2/friends/addFriend/" + urlParam("id") + "/" + Cookies["id"], function (data) {
                 console.log(data);
             });
-        });
+        });*/
 
 
         $("#creations_list").html("");
@@ -77,7 +91,7 @@ $(document).ready(function () {
         }
     }
 
-    function showFriendList(data) {
+    /*function showFriendList(data) {
         for (var i = 0; i < data.length; i++) {
             var friendInfo = $('<div class="friend_info"></div>');
 
@@ -105,7 +119,7 @@ $(document).ready(function () {
                 $("#friend_list").html('<a href="options.html">Vous devez vous connecter à facebook pour ajouter vos amis !</a>');
             }
         });
-    }
+    }*/
 
     function showProgressList(data) {
         for (var i = 0; i < data.length; i++) {
@@ -137,7 +151,7 @@ $(document).ready(function () {
 
     var idUser = urlParam("id");
     if (!idUser) {
-        $.getJSON("v1/profile/me/" + Cookies["id"], function (data) {
+        $.getJSON("v2/profile/me/" + Cookies["id"], function (data) {
             console.log(data);
             showProfileInfo(data, true);
         })
@@ -146,28 +160,28 @@ $(document).ready(function () {
                     location.replace("/index.html");
                 });
 
-        $.getJSON("v1/friends/me/" + Cookies["id"], function (data) {
+        /*$.getJSON("v2/friends/me/" + Cookies["id"], function (data) {
             console.log(data);
             showFriendList(data);
-        });
+        });*/
 
-        $.getJSON("v1/levelProgress/me/" + Cookies["id"], function (data) {
+        $.getJSON("v2/levelProgress/me/" + Cookies["id"], function (data) {
             console.log(data);
             showProgressList(data);
         });
 
     } else {
-        $.getJSON("v1/profile/" + idUser, function (data) {
+        $.getJSON("v2/profile/" + idUser, function (data) {
             console.log(data);
             showProfileInfo(data, false);
         });
 
-        $.getJSON("v1/friends/" + idUser, function (data) {
+        /*$.getJSON("v2/friends/" + idUser, function (data) {
             console.log(data);
             showFriendList(data);
-        });
+        });*/
 
-        $.getJSON("v1/levelProgress/" + idUser, function (data) {
+        $.getJSON("v2/levelProgress/" + idUser, function (data) {
             console.log(data);
             showProgressList(data);
         });

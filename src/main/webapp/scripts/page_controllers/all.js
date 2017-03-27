@@ -180,19 +180,23 @@ function setConnected(connected) {
         if(Cookies["role"] === "teacher") {
             $("#editor_bar").show();
             $("#groupes_bar").show();
+            $("#stat_bar").show();
+        } else if (Cookies["role"] === "student"){
+            $("#stat_bar").show(); 
+            $("#editor_bar").hide();
+            $("#groupes_bar").hide();
         }
         $("#login_navbar").hide();
         $("#info_profil_navbar").show();
-        $("#stat_bar").show();
         getNotifCount();
     } else {
-        $("#editor_bar").hide();
-        $("#info_profil_navbar").hide();
-        $("#login_navbar").show();
-        $("#stat_bar").hide();
-        $("#groupes_bar").hide();
         if (isLoginRequiredPage())
             location.replace("/");
+        $("#editor_bar").hide();
+        $("#stat_bar").hide();
+        $("#groupes_bar").hide();
+        $("#info_profil_navbar").hide();
+        $("#login_navbar").show();
     }
 }
 
@@ -277,12 +281,16 @@ function logoutUser() {
 }
 
 function checkConnection() {
-    if (!Cookies["id"])
+    if (!Cookies["id"]) {
         setConnected(false);
-    else
+        console.log("not connected !");
+    } else {
         $.getJSON("v2/users/isLogged/" + Cookies["id"], function (data) {
             setConnected(data.success);
         });
+        
+        console.log("connected ! [role : " + Cookies["role"] + "]");
+    }
 }
 
 /**
