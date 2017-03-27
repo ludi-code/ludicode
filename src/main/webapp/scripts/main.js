@@ -217,7 +217,7 @@ function executeCartes(){
 	var y = game.player.y;
 	
 	for(i = 0; i < imgs.length; i++){
-        console.log(imgs[i].id)
+        console.log("perso va : "+imgs[i].id)
 		if(imgs[i].id == "right")
 			x ++;          
 		if(imgs[i].id == "left")
@@ -226,9 +226,12 @@ function executeCartes(){
 			y ++;
 		if(imgs[i].id == "up")
 			y --;          
-        console.log(x+" "+y);
-        if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1 ||game.tiles[y][x]==1  )
+        console.log("coord: "+x+" "+y);
+        if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1 || game.tiles[y][x]==1  ){
+            
 			game.gplayer.showMessage("Collision avec un mur !");
+            break;
+        }
         else game.gplayer.moveToTile(x,y);
 	}
 }
