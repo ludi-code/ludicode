@@ -1,0 +1,32 @@
+Nom: Algo simple sans répétition
+# Type = langage utilisé: carte, block ou python
+Type: Carte
+# Au début on travaille avec un héros non orienté
+Orientation: absolue
+# Jeu d'instructions disponible pour ce niveau
+# En mode carte: ce sont des déplacements absolus. N = déplacement d'une case vers le Nord
+# idem pour S = Sud, E = Est et O = Ouest
+Instructions: N,S,O,E
+# Explications qui sont affichées à l'apprenant pour préciser l'objectif à atteindre
+Explications: Trouver le chemin le plus court
+# Desciption de la situation initiale:
+# H = Héros, C = Cible, c'est-à-dire la case que le héros doit atteindre,
+# X = Obstacle infranchissable, B = Bonus que le héros peut ramasser (ou pas)
+Plateau:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,C,-,-
+-,-,-,X,X,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,H,-,X,-,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+# Nombre maximal d'instructions autorisées pour résoudre ce puzzle
+Max_instructions: 12
+# Propositions de solutions et il peut y en avoir plusieurs
+# La solution utilisant le moins d'instructions est considéré comme la "meilleure" solution
+Solutions :
+# Ici deux solutions possibles nécessitant chacune 9 instructions
+NNNEEEEEE
+ENNNEEEEE
+Compétences: séquence

@@ -1,5 +1,10 @@
 package fr.iutinfo.beans;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +47,6 @@ public class Level{
 		this.explications=explications;
 		this.solution=solution;
 	}
-
 	
 	public String getContent() {return content;}
 
@@ -166,4 +170,5 @@ public class Level{
 	public String getSolution(){return this.solution;}
 	
 	public void setSolution(String solution){this.solution=solution;}
+	
 }
