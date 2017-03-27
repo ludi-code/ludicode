@@ -42,7 +42,7 @@ function registerStudent(name, password) {
 		url : "v2/students/register",
 		dataType : "json",
 		data : JSON.stringify({
-			"id" : 0,
+			//"id" : 0,
 			"name" : name,
 			"password" : password
 		}),
@@ -69,7 +69,7 @@ function registerTeacher(name, password, email) {
 		url : "v2/teachers/register",
 		dataType : "json",
 		data : JSON.stringify({
-			"id" : 0,
+			//"id" : 0,
 			"name" : name,
 			"password" : password,
             "email" : email

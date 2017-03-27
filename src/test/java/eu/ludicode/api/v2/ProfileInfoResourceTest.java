@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.ProfileInfo;
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.UserDao;
 
 
@@ -22,8 +22,7 @@ public class ProfileInfoResourceTest {
 	
 	@Test
 	public void test_getProfileInfo(){
-        User user = new User();
-        user.setEmail("email de test");
+        User2 user = new User2();
         user.setName("Napoleon");
         ProfileInfo info =  new ProfileInfo();    
         info.setUser(user); 
