@@ -28,12 +28,40 @@ public interface LevelDao {
             + "content text, "
             + "instructions text, "
             + "maxInstructions integer, "
+            + "solution text"
             + "authorId integer, "
             + "creationDate DATETIME DEFAULT CURRENT_TIMESTAMP, "
             + "levelType char(10),"
-            + "orientation boolean DEFAULT TRUE)")
+            + "orientation boolean DEFAULT TRUE)"
+            + "explication text DEFAULT 'Trouver le chemin'")
     void createLevelsTable();
 
+    //crée un niveau avec tout les information
+    @SqlUpdate("insert into levels (name, content, instructions, maxInstructions, solution, authorId, levelType, orientation, explication) "
+            + "values (:name, :jsonContent, :instructions, :maxInstructions, :solution, :authorId, :levelType, :orientation , :explication)")
+    @GetGeneratedKeys
+    int insert(@Bind("name") String name,
+            @Bind("jsonContent") String jsonContent,
+            @Bind("instructions") String instructions,
+            @Bind("maxInstructions") int maxInstructions,
+            @Bind("authorId") int authorId,
+            @Bind("levelType") String levelType,
+            @Bind("orientation") boolean orientation,
+            @Bind("explication") String explication);
+    
+  //crée un level de type tortue
+    @SqlUpdate("insert into levels (name, content, instructions, solution, authorId, levelType, orientation, explication) "
+            + "values (:name, :jsonContent, :instructions, :solution, :authorId, :levelType, :orientation , :explication)")
+    @GetGeneratedKeys
+    int insert(@Bind("name") String name,
+            @Bind("jsonContent") String jsonContent,
+            @Bind("instructions") String instructions,
+            @Bind("authorId") int authorId,
+            @Bind("levelType") String levelType,
+            @Bind("orientation") boolean orientation,
+            @Bind("explication") String explication);
+    
+    // crée des level de type block ou carte
     @SqlUpdate("insert into levels (name, content, instructions, maxInstructions, authorId, levelType, orientation) "
             + "values (:name, :jsonContent, :instructions, :maxInstructions, :authorId, :levelType, :orientation)")
     @GetGeneratedKeys
