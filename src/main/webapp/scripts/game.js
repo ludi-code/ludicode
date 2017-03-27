@@ -86,8 +86,9 @@ define(["jquery"], function ($) {
 
             this.grid.update(delta);
             this.theme.update(delta);
-            if (this.gplayer)
+            if (this.gplayer){
                 this.gplayer.update(delta);
+            }
             this.render();
         }
 
