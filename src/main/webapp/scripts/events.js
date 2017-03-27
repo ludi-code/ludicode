@@ -11,7 +11,8 @@ define(["jquery"], function (require) {
             if (cellId == 3) {
                 levelFinished();
                 // On réinitialise les instructions pour eviter que l'animation continue apres la fin du niveau
-                this.game.interpreter.setup();
+               console.log("Cest bien ici");
+               this.game.interpreter.setup();
             }
         }
 

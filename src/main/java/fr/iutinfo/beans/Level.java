@@ -3,18 +3,20 @@ package fr.iutinfo.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level {
+public class Level{
 
-	private int id;
-	private String name;
-	private int authorId;
-	private String content;
-	private String levelType;
-	private boolean orientation;
+	private int id; // id du niveau
+	private String name; //nom du niveau
+	private int authorId; // id de l'auteur du niveau
+	private String content; //Board mis en chaine de caractère possibilité de le parser.
+	private String levelType; // Type du level (Carte, Block, Python)
+	private boolean orientation; // si niveau orienté ou pas
 	private String instructions;
-	private int maxInstructions;
-	private List<Instruction> instructionsList;
-	private LevelList levelList;
+	private int maxInstructions; // nombre d'instruction maximum acceptées
+	private List<Instruction> instructionsList;// liste d'instruction acceptées
+	private LevelList levelList;// séquence contenant le level
+	private String explications;//explcation du level (par default :"trouver le chemain") [utile en Python]
+	private String solution;//solution du niveau [utile en Python]
 	
 	public Level() {
 		this(0);
@@ -25,6 +27,23 @@ public class Level {
 		instructionsList = new ArrayList<Instruction>();
 	}
 
+	public Level(int id, String name, int authorId, String content, String levelType, boolean orientation, String instructions,
+			int maxInstructions, List<Instruction>  instructionsList, String explications, String solution){
+		this.id = id;
+		this.name =name;
+		this.authorId=authorId;
+		this.content=content;
+		this.levelType=levelType;
+		this.orientation=orientation;
+		this.instructions=instructions;
+		this.maxInstructions=maxInstructions;
+		this.instructionsList = instructionsList;
+		this.levelList=null;
+		this.explications=explications;
+		this.solution=solution;
+	}
+
+	
 	public String getContent() {return content;}
 
 	public void setContent(String content) { this.content = content;}
@@ -71,7 +90,12 @@ public class Level {
 		content = serializeContent(structuredContent);
 	}
 
-	public Integer[][] getStructuredContent() {return parseLevel(content);}
+	public Integer[][] getStructuredContent() {
+		if(levelType.equals("Python")){
+			return null;
+		}
+		return parseLevel(content);
+	}
 
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;}
@@ -134,4 +158,12 @@ public class Level {
 	 * @param orientation
 	 */
 	public void setOrientation(boolean orientation) {this.orientation=orientation;}
+	
+	public String getExplications(){return this.explications;}
+	
+	public void setExplications(String explications){this.explications=explications;}
+	
+	public String getSolution(){return this.solution;}
+	
+	public void setSolution(String solution){this.solution=solution;}
 }
