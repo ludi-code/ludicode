@@ -25,7 +25,7 @@ public class ProfileInfoResource {
 	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 
 	
-	@GET
+	/*@GET
 	@Path("{idUser}")
 	public ProfileInfo getProfileInfo(@PathParam("idUser") int idUser) {
 		ProfileInfo profileInfo = new ProfileInfo();
@@ -47,6 +47,6 @@ public class ProfileInfoResource {
 		}
 		
 		throw new WebApplicationException(404);
-	}
+	}*/
 
 }

@@ -12,17 +12,17 @@ public class Feedback {
 	public Feedback() {
 	}
 	
-	public Feedback(boolean success, String message) {
-		this.success = success;
-		this.message = message;
-	}
-	
 	public Feedback(boolean success, String message, String role) {
 		this.success = success;
 		this.message = message;
 		this.role=role;
 	}
-	
+
+	public Feedback(boolean success, String message) {
+		this.success = success;
+		this.message = message;
+	}
+
 	public boolean isSuccess() {
 		return success;
 	}

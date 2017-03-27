@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class ProfileInfo {
 
-    private User user;
+    private User2 user;
     private List<LevelInfo> levelsInfo;
 
     public ProfileInfo() {
     }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public User2 getUser() { return user; }
+    public void setUser(User2 user) { this.user = user; }
 
     public List<LevelInfo> getLevelsInfo() { return levelsInfo; }
     public void setLevelsInfo(List<LevelInfo> levelsInfo) { this.levelsInfo = levelsInfo; }

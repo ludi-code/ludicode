@@ -9,8 +9,10 @@ import javax.ws.rs.core.MediaType;
 
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.ProfileInfo;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.LevelDao;
-import fr.iutinfo.dao.UserDao;
+import fr.iutinfo.dao.StudentDao;
+import fr.iutinfo.dao.TeacherDao;
 import fr.iutinfo.utils.Session;
 
 /**
@@ -21,16 +23,22 @@ import fr.iutinfo.utils.Session;
 @Path("/profile")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class ProfileInfoResource {
-	private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+	private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
+	private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
 	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 
 	
 	@GET
-	@Path("{idUser}")
-	public ProfileInfo getProfileInfo(@PathParam("idUser") int idUser) {
+	@Path("{table}/{idUser}")
+	public ProfileInfo getProfileInfo(@PathParam("table") String table, @PathParam("idUser") int idUser) {
 		ProfileInfo profileInfo = new ProfileInfo();
-		profileInfo.setUser(userDao.findById(idUser));
-		profileInfo.setLevelsInfo(levelDao.getLevelInfoByAuthor(idUser));
+		if(table.equals("students")) {
+			profileInfo.setUser((User2) studentDao.findById(idUser));
+			profileInfo.setLevelsInfo(levelDao.getLevelInfoByAuthor(idUser));
+		} else {
+			profileInfo.setUser((User2) teacherDao.findById(idUser));
+		}
+		
 		
 		return profileInfo;
 	}
@@ -41,11 +49,14 @@ public class ProfileInfoResource {
 		ProfileInfo profileInfo = new ProfileInfo();
 		if(Session.isLogged(cookie)) {
 			int idUser = Session.getUser(cookie).getId();
-			profileInfo.setUser(userDao.findById(idUser));
-			profileInfo.setLevelsInfo(levelDao.getLevelInfoByAuthor(idUser));
+			if(Session.isStudent(cookie)) {
+				profileInfo.setUser((User2) studentDao.findById(idUser));
+				profileInfo.setLevelsInfo(levelDao.getLevelInfoByAuthor(idUser));
+			} else if (Session.isTeacher(cookie)){
+				profileInfo.setUser((User2) teacherDao.findById(idUser));
+			}
 			return profileInfo;
 		}
-		
 		throw new WebApplicationException(404);
 	}
 
