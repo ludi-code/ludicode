@@ -18,6 +18,9 @@ function form(nbCheck){
         $(".form-add").hide();
     }
 }
+ //Gestion du bouton Ajouter
+ 
+
 
 
 

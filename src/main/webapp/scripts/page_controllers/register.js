@@ -15,7 +15,7 @@ $(document).ready(function () {
             console.log("is a teacher !");
             var email = $("#email_register").val();
             registerTeacher(name, passwd, email);
-        } else 
+        } else
 		    registerStudent(name, passwd);
 
 		$("#name_register").val("");
