@@ -10,6 +10,7 @@ import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Student;
 import fr.iutinfo.beans.Teacher;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.StudentDao;
 import fr.iutinfo.dao.TeacherDao;
 import fr.iutinfo.utils.Utils;
@@ -30,6 +31,18 @@ public class StudentResourceTest {
 		Teacher teacher = new Teacher();
 		teacher.setName("Prof");
 		teacherDao.insert(teacher);
+	}
+	
+	@Test
+	public void create_student_should_add_a_student_in_table_students() {
+		int nbStudents = studentDao.getAll().size();
+		
+		Student student = new Student();
+		student.setName("Napoleon");
+		student.setPassword(Utils.hashMD5("coucou"));
+		new StudentResource().createStudent(student);
+		
+		Assert.assertEquals(nbStudents+1, studentDao.getAll().size());
 	}
 	
 	@Test

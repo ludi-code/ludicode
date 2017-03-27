@@ -59,6 +59,10 @@ public interface StudentDao {
     @SqlQuery("select * from students")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Student> getAll();
+    
+    @SqlQuery("select count(id) from students")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    int getCount();
 
     @SqlQuery("select * from students order by name asc")
     @RegisterMapperFactory(BeanMapperFactory.class)

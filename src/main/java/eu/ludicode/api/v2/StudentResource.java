@@ -34,7 +34,7 @@ public class StudentResource {
 		try {
 			fb = isValidStudent(student);
 			if (fb.isSuccess()) {
-
+				
 				// on hashe le mdp pour le protéger
 				String hashedPassword = Utils.hashMD5(student.getPassword());
 				if (hashedPassword == null)

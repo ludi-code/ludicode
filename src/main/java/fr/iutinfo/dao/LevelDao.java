@@ -51,10 +51,13 @@ public interface LevelDao {
     @RegisterMapperFactory(BeanMapperFactory.class)
     Level findById(@Bind("id") int id);
 
-    @SqlQuery("select * "
-            + "from levels")
+    @SqlQuery("select * from levels")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Level> getAll();
+    
+    @SqlQuery("select count(id) from levels")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    int getCount();
 
     @SqlQuery("select * "
             + "from levels "

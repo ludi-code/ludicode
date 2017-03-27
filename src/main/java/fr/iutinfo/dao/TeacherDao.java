@@ -56,6 +56,10 @@ public interface TeacherDao {
     @SqlQuery("select * from teachers")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Teacher> getAll();
+    
+    @SqlQuery("select count(id) from teachers")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+    int getCount();
 
     @SqlQuery("select * from teachers order by name asc")
     @RegisterMapperFactory(BeanMapperFactory.class)

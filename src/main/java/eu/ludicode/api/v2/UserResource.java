@@ -34,6 +34,9 @@ public class UserResource {
 
     /**
 	 * Insert l'utilisateur si celui ci est valide.
+	 * 	Cette méthode n'est pas utilisé car on accède directement à createTeacher ou Student
+	 * 	étant donné que l'on sait si l'utilisateur est un élève ou un professeur grâce à une
+	 * 	case à cocher sur la page html.
 	 * @param user
 	 * @return
 	 */
@@ -41,11 +44,11 @@ public class UserResource {
     @Path("/register")
     public Feedback createUser(User2 user) {
     	Feedback fb = null;
-		/*if(user instanceof Teacher) {
+		if(user instanceof Teacher) {
 			fb = new TeacherResource().createTeacher((Teacher)user);
 		} else {
 			fb = new StudentResource().createStudent((Student)user);
-		}*/
+		}
 		return fb;
     }
 
