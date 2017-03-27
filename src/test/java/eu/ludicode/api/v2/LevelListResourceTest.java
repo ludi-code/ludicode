@@ -1,4 +1,4 @@
-package eu.ludicode.api.v2;
+/*package eu.ludicode.api.v2;
 
 import java.util.ArrayList;
 
@@ -58,3 +58,4 @@ public class LevelListResourceTest {
 	}
 
 }
+*/

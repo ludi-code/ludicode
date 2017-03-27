@@ -1,4 +1,4 @@
-package eu.ludicode.api.v2;
+/*package eu.ludicode.api.v2;
 
 import java.util.ArrayList;
 
@@ -82,3 +82,4 @@ public class LevelProgressResourceTest {
 		Assert.assertEquals(lead.get(1).getName(), "Georges");
 	}
 }
+*/
