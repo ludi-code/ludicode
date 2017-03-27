@@ -91,7 +91,7 @@ define(["jquery"], function ($) {
             }
             this.render();
         }
-
+        
 
         this.getSpeed = function getSpeed() {
             return parseInt($("#speed").val()) / 10;

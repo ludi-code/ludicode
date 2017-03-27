@@ -49,6 +49,7 @@ define(["jquery"], function ($) {
 
         // Met a jour le joueur (utilisé pour gerer les animations)
         this.update = function update(delta) {
+            
             // ----- Animation de deplacement vers (goToX, goToY)
             if (Math.abs(goToX - this.x) > 2) {
                 // Si on est encore loin du point a atteindre en x (> 2 px de difference)
@@ -223,5 +224,6 @@ define(["jquery"], function ($) {
         }
 
     }
+    
 
 });

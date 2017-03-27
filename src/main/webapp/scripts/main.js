@@ -212,26 +212,26 @@ function execute(code) {
 function executeCartes(){
 	var d = document.querySelector("#carteDiv_listeInstru");
 	var imgs = d.getElementsByTagName('img');
-	
+    
 	var x = game.player.x;
 	var y = game.player.y;
-    console.log(this.game.tiles[0].length);
-    console.log(this.game.tiles.length);
 	
 	for(i = 0; i < imgs.length; i++){
+        console.log(imgs[i].id)
 		if(imgs[i].id == "right")
-			x ++;
+			x ++;          
 		if(imgs[i].id == "left")
-			x -- ;
+			x -- ;    
 		if(imgs[i].id == "down")
 			y ++;
 		if(imgs[i].id == "up")
-			y --;
+			y --;          
+        console.log(x+" "+y);
+        
         if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1)
 			game.gplayer.showMessage("Collision avec un mur !");
 		else if(game.tiles[y][x]==1 ) alert("mur ! "+x+","+y);
-		else if(game.tiles[y][x]==3 ) alert("Gagné !");
-        else game.gplayer.moveToTile(x,y);
+        game.gplayer.moveToTile(x,y);
 	}
 }
 
