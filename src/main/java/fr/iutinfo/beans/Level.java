@@ -5,16 +5,18 @@ import java.util.List;
 
 public class Level{
 
-	private int id;
-	private String name;
-	private int authorId;
-	private String content;
-	private String levelType;
-	private boolean orientation;
+	private int id; // id du niveau
+	private String name; //nom du niveau
+	private int authorId; // id de l'auteur du niveau
+	private String content; //Board mis en chaine de caractère possibilité de le parser.
+	private String levelType; // Type du level (Carte, Block, Python)
+	private boolean orientation; // si niveau orienté ou pas
 	private String instructions;
-	private int maxInstructions;
-	private List<Instruction> instructionsList;
-	private LevelList levelList;
+	private int maxInstructions; // nombre d'instruction maximum acceptées
+	private List<Instruction> instructionsList;// liste d'instruction acceptées
+	private LevelList levelList;// séquence contenant le level
+	private String explications;//explcation du level (par default :"trouver le chemain") [utile en Python]
+	private String solution;//solution du niveau [utile en Python]
 	
 	public Level() {
 		this(0);
@@ -26,8 +28,8 @@ public class Level{
 	}
 
 	public Level(int id, String n, int aut, String c, String l, boolean o, String i, int m, List<Instruction> in){
-		this.id=id;
-		this.name=n;
+		this.id = id;
+		this.name =n;
 		this.authorId=aut;
 		this.content=c;
 		this.levelType=l;
