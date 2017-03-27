@@ -227,11 +227,9 @@ function executeCartes(){
 		if(imgs[i].id == "up")
 			y --;          
         console.log(x+" "+y);
-        
-        if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1)
+        if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1 ||game.tiles[y][x]==1  )
 			game.gplayer.showMessage("Collision avec un mur !");
-		else if(game.tiles[y][x]==1 ) alert("mur ! "+x+","+y);
-        game.gplayer.moveToTile(x,y);
+        else game.gplayer.moveToTile(x,y);
 	}
 }
 
