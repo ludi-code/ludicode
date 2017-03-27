@@ -3,7 +3,7 @@ package fr.iutinfo.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level {
+public class Level{
 
 	private int id;
 	private String name;
@@ -25,6 +25,19 @@ public class Level {
 		instructionsList = new ArrayList<Instruction>();
 	}
 
+	public Level(int id, String n, int aut, String c, String l, boolean o, String i, int m, List<Instruction> in){
+		this.id = id;
+		this.name =n;
+		this.authorId=aut;
+		this.content=c;
+		this.levelType=l;
+		this.orientation=o;
+		this.instructions=i;
+		this.maxInstructions=m;
+		instructionsList = in;
+		this.levelList=null;
+	}
+	
 	public String getContent() {return content;}
 
 	public void setContent(String content) { this.content = content;}
