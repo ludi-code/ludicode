@@ -27,18 +27,22 @@ public class Level{
 		instructionsList = new ArrayList<Instruction>();
 	}
 
-	public Level(int id, String n, int aut, String c, String l, boolean o, String i, int m, List<Instruction> in){
+	public Level(int id, String name, int authorId, String content, String levelType, boolean orientation, String instructions,
+			int maxInstructions, List<Instruction>  instructionsList, String explications, String solution){
 		this.id = id;
-		this.name =n;
-		this.authorId=aut;
-		this.content=c;
-		this.levelType=l;
-		this.orientation=o;
-		this.instructions=i;
-		this.maxInstructions=m;
-		instructionsList = in;
+		this.name =name;
+		this.authorId=authorId;
+		this.content=content;
+		this.levelType=levelType;
+		this.orientation=orientation;
+		this.instructions=instructions;
+		this.maxInstructions=maxInstructions;
+		this.instructionsList = instructionsList;
 		this.levelList=null;
+		this.explications=explications;
+		this.solution=solution;
 	}
+
 	
 	public String getContent() {return content;}
 
@@ -86,7 +90,12 @@ public class Level{
 		content = serializeContent(structuredContent);
 	}
 
-	public Integer[][] getStructuredContent() {return parseLevel(content);}
+	public Integer[][] getStructuredContent() {
+		if(levelType.equals("Python")){
+			return null;
+		}
+		return parseLevel(content);
+	}
 
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;}
@@ -149,4 +158,12 @@ public class Level{
 	 * @param orientation
 	 */
 	public void setOrientation(boolean orientation) {this.orientation=orientation;}
+	
+	public String getExplications(){return this.explications;}
+	
+	public void setExplications(String explications){this.explications=explications;}
+	
+	public String getSolution(){return this.solution;}
+	
+	public void setSolution(String solution){this.solution=solution;}
 }
