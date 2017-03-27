@@ -21,16 +21,19 @@ public class CountResource {
     private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 	
     @GET
+    @Path("/nbTeachers")
     public int getNbTeachers() {
     	return teacherDao.getCount();
     }
     
     @GET
+    @Path("/nbStudents")
     public int getNbStudents() {
     	return studentDao.getCount();
     }
     
     @GET
+    @Path("/nbLevels")
     public int getNbLevels() {
     	return levelDao.getCount();
     }
