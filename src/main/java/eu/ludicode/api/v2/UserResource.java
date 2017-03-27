@@ -9,7 +9,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.BDDFactory;
@@ -28,10 +30,13 @@ import fr.iutinfo.utils.Utils;
  */
 
 @Path("/users")
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class UserResource {
     private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
     private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
 
+    public UserResource() {}
+    
     /**
 	 * Insert l'utilisateur si celui ci est valide.
 	 * 	Cette méthode n'est pas utilisé car on accède directement à createTeacher ou Student
@@ -128,7 +133,6 @@ public class UserResource {
 	public User2 getUser(@PathParam("cookie") String cookie) {
 		return Session.getUser(cookie);
 	}
-
 
 	/**
 	 *  recherche tout les utilisateurs contenant "term"

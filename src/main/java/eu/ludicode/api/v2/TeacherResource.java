@@ -8,7 +8,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import eu.ludicode.api.dto.Feedback;
 import fr.iutinfo.BDDFactory;
@@ -18,6 +20,7 @@ import fr.iutinfo.utils.Session;
 import fr.iutinfo.utils.Utils;
 
 @Path("/teachers")
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class TeacherResource {
 	private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
 
@@ -27,6 +30,9 @@ public class TeacherResource {
 	 * @param teacher
 	 * @return
 	 */
+	
+	public TeacherResource() {};
+	
 	@POST
 	@Path("/register")
 	public Feedback createTeacher(Teacher teacher) {

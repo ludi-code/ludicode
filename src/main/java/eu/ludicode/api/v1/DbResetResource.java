@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/resetDb")
-@Produces(MediaType.TEXT_HTML)
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class DbResetResource {
 
     private static FriendsRelationsDao friendDao = BDDFactory.getDbi().open(FriendsRelationsDao.class);

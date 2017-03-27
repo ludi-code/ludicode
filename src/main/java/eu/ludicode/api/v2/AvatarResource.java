@@ -12,6 +12,8 @@ import fr.iutinfo.utils.Session;
 
 @Path("/avatars")
 public class AvatarResource {
+	
+	public AvatarResource() {}
 
 	 @GET
 	 @Path("get/{cookie}")
