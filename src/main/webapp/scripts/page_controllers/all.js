@@ -204,7 +204,7 @@ function updateNotifDate() {
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
-        url: "v2/users/updateNotifDate/" + Cookies["id"],
+        url: "v2/" + Cookies["role"] + "s/updateNotifDate/" + Cookies["id"],
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             console.log(data);
@@ -269,7 +269,7 @@ function logoutUser() {
     if (!Cookies["id"])
         setConnected(false);
     else
-        $.getJSON("v2/users/logout/" + Cookies["id"], function (data) {
+        $.getJSON("v2/" + Cookies["role"] + "s/logout/" + Cookies["id"], function (data) {
             console.log(data);
             setConnected(false);
             window.location.href = "/";
