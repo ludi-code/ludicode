@@ -84,6 +84,18 @@ public class UserResource {
 		}
 		return fb;
 	}
+	
+	@GET
+	@Path("/isTeacher")
+	public Teacher isTeacher(User2 user) {
+		return teacherDao.teacherIsCorrect(user.getName(), Utils.hashMD5(user.getPassword()));
+	}
+	
+	@GET
+	@Path("/isStudent")
+	public Student isStudent(User2 user) {
+		return studentDao.studentIsCorrect(user.getName(), Utils.hashMD5(user.getPassword()));
+	}
     
     /**
      * Lit tout les utilisateurs

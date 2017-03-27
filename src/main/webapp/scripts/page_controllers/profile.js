@@ -48,27 +48,28 @@ $(document).ready(function () {
 
 
     function showProfileInfo(data, currentUserProfile) {
-        //$("#info_player").html("");
-        var name;
+        /*$.getJSON("v2/" + Cookies["role"] + "s/me/" + Cookies["id"], function (data) {
+            
+        });*/
+        
+        var name = "";
         $.getJSON("v2/" + Cookies["role"] + "s/me/" + Cookies["id"], function (data) {
-            if(Cookies["role"] === "student") {
-                name = data.name;
-                $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/><br/>");
-                // Chargement de l'image de profil
-                $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
-            } else if (Cookies["role"] === "teacher") {
-                $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/><br/>");
-                // Chargement de l'image de profil
-                $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
-            }
+            name = data.name;
+            console.log(name);
+            // Chargement de l'image de profil
+            $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
+            $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/>");
         });
 
         if (currentUserProfile) {
            if(Cookies["role"] === "teacher") {
-                $.getJSON("v2/teachers/getId" + name, function (data) {
+                console.log(name);
+                $.getJSON("v2/teachers/getId/" + name, function (data) {
                     $("#info_player").append("<b> Email :</b> " + data.email + "<br/>");
                 });
             }
+            //element.insertAfter(newElement, afterElement)
+            $("#info_player").prepend("<i> " + Cookies["role"] + "</i><br/>");
             $("#info_player").append("<a href='options.html'> Modifier mon profil </a> <br/>");
         }
         /*else
