@@ -1,4 +1,4 @@
-package eu.ludicode.api.v2;
+/*package eu.ludicode.api.v2;
 
 import static org.junit.Assert.*;
 
@@ -87,3 +87,4 @@ public class TeacherResourceTest {
 	}
 
 }
+*/
