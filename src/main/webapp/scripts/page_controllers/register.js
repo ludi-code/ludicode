@@ -12,11 +12,11 @@ $(document).ready(function () {
 		var passwd = $("#password_register").val();
         
         if(document.getElementById('checkbox').checked == true) {
-            console.log("checked !");
+            console.log("is a teacher !");
             var email = $("#email_register").val();
-            registerUser(name, passwd, email);
+            registerTeacher(name, passwd, email);
         } else 
-		    registerUser(name, passwd);
+		    registerStudent(name, passwd);
 
 		$("#name_register").val("");
 		$("#password_register").val("");
@@ -35,7 +35,7 @@ function gBox(nbCheck){
     }
 }
 
-function registerUser(name, password) {
+function registerStudent(name, password) {
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
@@ -62,7 +62,7 @@ function registerUser(name, password) {
 	});
 }
 
-function registerUser(name, password, email) {
+function registerTeacher(name, password, email) {
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
