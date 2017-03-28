@@ -9,7 +9,9 @@ Orientation: absolue
 Instructions: N,S,O,E
 # Explications qui sont affichées à l'apprenant pour préciser l'objectif à atteindre
 Explications: Trouver le chemin le plus court
-# Desciption de la situation initiale:
+#Les dimensions du plateau: longueur des lignes,longueur des colonnes
+Dimensions: 10;8
+# Description de la situation initiale:
 # H = Héros, C = Cible, c'est-à-dire la case que le héros doit atteindre,
 # X = Obstacle infranchissable, B = Bonus que le héros peut ramasser (ou pas)
 Plateau:
