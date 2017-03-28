@@ -137,8 +137,8 @@ public class LevelResource {
 	 */
 	@POST
 	@Path("/add/{cookie}/{idList}")
-	public Feedback createUser(Level level, @PathParam("cookie") String cookie, @PathParam("idList") int idList) {
-		if(Session.isLogged(cookie)) {
+	public Feedback addLevelToTeacherList(Level level, @PathParam("cookie") String cookie, @PathParam("idList") int idList) {
+		if(Session.isLogged(cookie) && Session.isTeacher(cookie)) {
 			// User enregistré, l'envoie du niveau peux être effectué
 			if(isValidLevel(level)) {
 				// -1 comme prochain niveau de la série = dernier niveau
