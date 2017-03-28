@@ -11,11 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import fr.iutinfo.BDDFactory;
 import eu.ludicode.api.dto.Feedback;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.NotifLevel;
 import fr.iutinfo.beans.NotifLevelCount;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.InstructionsDao;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelListDao;

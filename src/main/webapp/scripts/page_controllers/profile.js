@@ -60,13 +60,10 @@ $(document).ready(function () {
                     $("#info_player").append(data.email + "<br/>");
                     $("#creations_list").html("");
                     if (location.search === "")
-                        $("#creations_list").append('<a  class="btn btn-primary" href="listsEditor.html">Organiser mes listes</a>');
-                    //TODO : afficher création prof, faire la requète JSON.
-                    /*for (var i = 0; i < data.levelsInfo.length; i++) {
-                        var levelInfo = $('<div class="level_info"></div>');
-                        levelInfo.append('<a href="game.html?level=' + data.levelsInfo[i].id + '">' + data.levelsInfo[i].name + '</a>');
-                        $("#creations_list").append(levelInfo);
-                    }*/
+                        $("#creations_list").append('<a  class="btn btn-primary" href="listsEditor.html">Organiser mes listes</a><br />');
+                    $.getJSON("v2/levelProgress/" + data.id, function (data) {
+                        showCreationList(data);
+                    });
                     $("#progress_panel").hide();
                 } else if(Cookies["role"] === "student") {
                     $("#creations_panel").hide();
@@ -90,63 +87,20 @@ $(document).ready(function () {
                 if(role === "teacher") {
                     $("#info_player").append(data.email + "<br/>");
                     $("#creations_list").html("");
-                    //TODO : afficher création prof, faire la requète JSON.
-                    /*for (var i = 0; i < data.levelsInfo.length; i++) {
-                        var levelInfo = $('<div class="level_info"></div>');
-                        levelInfo.append('<a href="game.html?level=' + data.levelsInfo[i].id + '">' + data.levelsInfo[i].name + '</a>');
-                        $("#creations_list").append(levelInfo);
-                    }*/
+                    $.getJSON("v2/levels/author/" + id, function (data) {
+                        showCreationList(data);
+                    });
                     $("#progress_panel").hide();
                 } else if(role === "student") {
                     $("#creations_panel").hide();
-                    /*$.getJSON("v2/levelProgress/me/" + Cookies["id"], function (data) {
+                    $.getJSON("v2/levelProgress/" + idUser, function (data) {
                         console.log(data);
                         showProgressList(data);
-                    });*/
+                    });
                 }
             });
             
         }
-        
-        /*
-        var name = "";
-        $.getJSON("v2/" + Cookies["role"] + "s/me/" + Cookies["id"], function (data) {
-            name = data.name;
-            console.log(name);
-            // Chargement de l'image de profil
-            $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
-            $("#info_player").prepend("<b> Pseudo :</b> " + data.name + "<br/>");
-        });
-
-        if (currentUserProfile) {
-           if(Cookies["role"] === "teacher") {
-                console.log(name);
-                $.getJSON("v2/teachers/getId/" + name, function (data) {
-                    $("#info_player").append("<b> Email :</b> " + data.email + "<br/>");
-                });
-            }
-            //element.insertAfter(newElement, afterElement)
-            $("#info_player").prepend("<i> " + Cookies["role"] + "</i><br/>");
-            $("#info_player").append("<a href='options.html'> Modifier mon profil </a> <br/>");
-        }*/
-        /*else
-            $("#info_player").append('<button id="add-friend" type="button" class="btn btn-primary">Ajouter en ami</button>');*/
-
-        /*$("#add-friend").click(function () {
-            $.getJSON("/v2/friends/addFriend/" + urlParam("id") + "/" + Cookies["id"], function (data) {
-                console.log(data);
-            });
-        });*/
-
-/*
-        $("#creations_list").html("");
-        if (location.search === "")
-            $("#creations_list").append('<a  class="btn btn-primary" href="listsEditor.html">Organiser mes listes</a>');
-        for (var i = 0; i < data.levelsInfo.length; i++) {
-            var levelInfo = $('<div class="level_info"></div>');
-            levelInfo.append('<a href="game.html?level=' + data.levelsInfo[i].id + '">' + data.levelsInfo[i].name + '</a>');
-            $("#creations_list").append(levelInfo);
-        }*/
     }
 
     /*function showFriendList(data) {
@@ -185,16 +139,18 @@ $(document).ready(function () {
             progress_list.append('<a href="game.html?level=' + data[i].id + '">' + data[i].name + '</a><br />');
         }
     }
+    
+    function showCreationList(data) {
+        for (var i = 0; i < data.length; i++) {
+            var creations_list = $('#creations_list');
+            creations_list.append('<a href="game.html?level=' + data[i].id + '">' + data[i].name + '</a><br />');
+        }
+    }
 
     var idUser = urlParam("id");
     if (!idUser) {
         showProfileInfo(true);
     } else {
         showProfileInfo(false);
-
-        $.getJSON("v2/levelProgress/" + idUser, function (data) {
-            console.log(data);
-            showProgressList(data);
-        });
     }
 });
