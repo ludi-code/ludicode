@@ -1,3 +1,7 @@
+Editeur: si on place un deuxième départ(ou arrivée) enlevé l'autre
+
+Corriger la page des paramètre(options.html)[bug incompris]
+
 Ajout de boucle dans le mode carte(Répétition)
 
 Ajout de bonus en mode carte et bloc(Type bonus Kodable)
@@ -39,5 +43,7 @@ Blockly pouvoir paramètrer les block for et if(par forcément répéter 3 fois)
 Intégration de badge(style: "t'as battu le prof")
 
 Avater et Friends n'ont pas était testé et mis en V2 (utile?)
+
+Enfant puisse aussi utilisé l'éditeur et ce partager leurs niveaux entre eux.(demander a secq)
 
 Et tout le reste
