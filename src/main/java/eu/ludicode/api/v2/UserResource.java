@@ -50,9 +50,15 @@ public class UserResource {
     public Feedback createUser(User2 user) {
     	Feedback fb = null;
 		if(user instanceof Teacher) {
-			fb = new TeacherResource().createTeacher((Teacher)user);
+			Teacher t = new Teacher();
+			t.setName(user.getName());
+			t.setPassword(user.getPassword());
+			fb = new TeacherResource().createTeacher(t);
 		} else {
-			fb = new StudentResource().createStudent((Student)user);
+			Student s = new Student();
+			s.setName(user.getName());
+			s.setPassword(user.getPassword());
+			fb = new StudentResource().createStudent(s);
 		}
 		return fb;
     }

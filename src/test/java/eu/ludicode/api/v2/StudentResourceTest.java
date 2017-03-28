@@ -1,4 +1,4 @@
-/*package eu.ludicode.api.v2;
+package eu.ludicode.api.v2;
 
 import java.util.List;
 
@@ -124,4 +124,3 @@ public class StudentResourceTest {
 	}
 
 }
-*/
