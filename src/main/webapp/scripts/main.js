@@ -232,7 +232,10 @@ function executeCartes(){
 			game.gplayer.showMessage("Collision avec un mur !");
             break;
         }
-        else game.gplayer.moveToTile(x,y);
+        else{
+            game.gplayer.update(game.tiles);
+            game.gplayer.moveToTile(x,y);
+        } 
 	}
 }
 
