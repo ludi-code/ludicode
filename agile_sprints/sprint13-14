@@ -1,0 +1,27 @@
+Retrospective de sprint
+Nom du scrum master des sprints 13 et 14 : Vitse Marie
+
+##Ce que nous avons fait durant ces sprints:
+	- Ajout d'une page permettant à un professeur de créer un groupe ainsi 
+	  que des comptes pour ces élèves
+	- Tentative de réglage de l'animation de déplacement en mode carte
+	- Tentative de débuggage de l'affichage des profils avec la v2
+	- Débugage du resetDb
+	- Onglets de l'application Android fonctionnels
+
+##Ce que nous allons faire durant les prochains sprints:
+	- Finaliser le développement afin de rendre une version propre mardi après-midi
+	- Ré-écrire certains tests, et en ajouter d'autres        
+
+##Qu'avons nous observé ?
+        - La BDD pose problème avec les id de la table teachers et de la table students,
+	  car ils sont auto-incrémentés, il y a donc un teacher d'id = 1 et un student d'id = 1
+
+###Quelle décision prenons nous suite à cette expérience ?
+    	- Une solution serait d'enlever cette auto-incrémentation, et de calculer l'id nous même
+	  afin qu'il soit unique dans les 2 tables réunies. Mais cela prendrais trop de temps,
+	  et ce serait trop risqué d'effectuer cette manoeuvre à 2 sprints du rendu.
+	- Nous décidons donc de cacher l'accès aux profils.
+
+##Mémo
+	Rien
