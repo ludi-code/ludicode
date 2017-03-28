@@ -1,0 +1,18 @@
+Retrospective de sprint
+Nom du scrum master des sprints 15 et 16 : Morel François
+
+##Ce que nous avons fait durant ces sprints:
+	- Ajout de la classe ParseLevel qui créer un niveau à partir d'un fichier (non fini)
+	- Quasi-finalisation de l'implémentation de la deuxieme version du serveur (ex: refonte profil)
+	- Ajout du chargement de tableau qui sont convertis en niveaux Python/Tortue et qui sont mis sur une page chacun (ajout d'un système de navigation etre les pages)
+	- Ajout d'un bouton pour réinitialiser les intructions en mode cartes
+	- Ajout graphiques (pop-up collision mur)
+	- Réglages bugs
+	- Renommage et changement graphique sur l'application Android
+	- Ajout d'un message en cas de problèmes de connexion sur l'application Android
+	- Sécurisation de l'application Android
+	- Ajout d'outils de gestion des élèves pour les enseignants(ajout, modification et suppression); ajout dans la base de données en conséquence
+	- Création de fichier "A faire" pour les futurs dévelopeurs de Ludicode
+	 
+##Qu'avons nous observé ?
+      - ce fut très complexe de reprendre un code qui n'était pas le notre, mais nous avons su nous l'approprier et avancer, et ce fut une bonne expérience

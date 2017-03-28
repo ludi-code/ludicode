@@ -11,11 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import fr.iutinfo.BDDFactory;
 import eu.ludicode.api.dto.Feedback;
+import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.NotifLevel;
 import fr.iutinfo.beans.NotifLevelCount;
+import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.InstructionsDao;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelListDao;
@@ -137,8 +138,8 @@ public class LevelResource {
 	 */
 	@POST
 	@Path("/add/{cookie}/{idList}")
-	public Feedback createUser(Level level, @PathParam("cookie") String cookie, @PathParam("idList") int idList) {
-		if(Session.isLogged(cookie)) {
+	public Feedback addLevelToTeacherList(Level level, @PathParam("cookie") String cookie, @PathParam("idList") int idList) {
+		if(Session.isLogged(cookie) && Session.isTeacher(cookie)) {
 			// User enregistré, l'envoie du niveau peux être effectué
 			if(isValidLevel(level)) {
 				// -1 comme prochain niveau de la série = dernier niveau

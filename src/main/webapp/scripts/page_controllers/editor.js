@@ -370,7 +370,7 @@ function createList() {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: "v1/levelLists/create/" + Cookies["id"],
+        url: "v2/levelLists/create/" + Cookies["id"],
         dataType: "json",
         data: json,
         success: function (data, textStatus, jqXHR) {

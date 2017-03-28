@@ -228,7 +228,8 @@ function executeCartes(){
 			y --;          
         console.log("coord: "+x+" "+y);
         if(x <0 || y <0 || x >this.game.tiles[0].length-1 || y>this.game.tiles.length-1 || game.tiles[y][x]==1  ){
-            
+            game.gplayer.x = x;
+            game.gplayer.y = y;
 			game.gplayer.showMessage("Collision avec un mur !");
             break;
         }

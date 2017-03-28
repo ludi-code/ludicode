@@ -1,0 +1,170 @@
+Nom: Algo simple sans répétition
+# Type = langage utilisé: carte, block ou python
+Type: Carte
+# Au début on travaille avec un héros non orienté
+Orientation: absolue
+# Jeu d'instructions disponible pour ce niveau
+# En mode carte: ce sont des déplacements absolus. N = déplacement d'une case vers le Nord
+# idem pour S = Sud, E = Est et O = Ouest
+Instructions: N,S,O,E
+# Explications qui sont affichées à l'apprenant pour préciser l'objectif à atteindre
+Explications: Trouver le chemin le plus court
+#Les dimensions du plateau: longueur des lignes;longueur des colonnes
+Dimensions: 10;8
+# Desciption de la situation initiale:
+# H = Héros, C = Cible, c'est-à-dire la case que le héros doit atteindre,
+# X = Obstacle infranchissable, B = Bonus que le héros peut ramasser (ou pas)
+Plateau:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,C,-,-
+-,-,-,X,X,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,H,-,X,-,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+# Nombre maximal d'instructions autorisées pour résoudre ce puzzle
+Max_instructions: 12
+# Propositions de solutions et il peut y en avoir plusieurs
+# La solution utilisant le moins d'instructions est considéré comme la "meilleure" solution
+Solutions :
+# Ici deux solutions possibles nécessitant chacune 9 instructions
+NNNEEEEEE
+ENNNEEEEE
+Compétences: séquence
+#-------------------------------------------------------------------------------------------
+#Niveau carte non orientée avec répétition
+Nom: Puzzle similaire au précédent mais avec l'usage de répétition ne contenant qu'une seule instruction dans le corps de la boucle
+Type: Carte
+Orientation: absolue
+# on a rajouté l'instruction de Répetition (R), typê boucle à compteur
+# R(nbRepetitions,instructions)
+Instructions: N,S,O,E,R
+Explications: Trouver le chemin le plus court en utilisant le moins d'instructions possible
+Dimensions: 10;8
+Plateau:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,C,-,-
+-,-,-,X,X,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,H,-,X,-,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max_instructions: 5
+Solutions:
+# Nombre d'instructions = RNRE (soit 4 instructions)
+R(3,N)R(6,E)
+# Nombre d'instructions = ERNRE (soit 5 instructions)
+ER(3,N)R(5,E)
+# On distingue les types de répétitions selon la taille du corps de la boucle: répétition-1 (une seule instruction répétée)
+# répétition-2 (deux instructions répétées) et répétition-n (quand il y en a 2+)
+Compétences: répétition-1
+#-------------------------------------------------------------------------------------------
+Nom: Puzzle non orienté avec répétition contenant plusieurs instructions dans le corps de la boucle
+Type: Carte
+Orientation: absolue
+Instructions: N,S,O,E,R
+Explications: Trouver le chemin le plus court
+Dimensions: 10;8
+Plateau:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,X,-,-,-,-,-
+-,-,-,X,-,C,-,-,-,-
+-,-,X,-,-,X,-,-,-,-
+X,X,-,-,X,-,-,-,-,-
+X,H,-,X,-,-,-,-,-,-
+X,X,X,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max_instructions: 10
+Solutions:
+# La plus courte ne contient que 3 instructions: REN
+R(4,EN)
+ER(3,NE)
+# la compétence 'héros-non-orienté' est injectée directement car on est dans 'Orientation: absolue'
+Compétences: répétition-2, heros-non-orienté
+#-------------------------------------------------------------------------------------------
+Nom: Personnage orienté avec répétition simple
+Type: Carte
+Orientation: relative
+# On change le langage, les primitives deviennent A = Avancer (dans la direction dans laquelle est orientée le personnage)
+# D = tourner à droite de 90° en restant sur la même case, G = Gauche (idem) et R = Répétition comme avant
+Instructions: A, D, G, R
+Explications: Trouver le chemin le plus court
+# on ne peut plus utilser H pour représenter le Héros car il est maintenant orienté. Pour ne pas pourrir l'affichage en 
+# mode texte du plateau (facilite l'édition), le Héros est représenté par son orientation: N (Nord), S (Sud), E (Est) et O (Ouest)
+Dimensions: 10;8
+Plateau:
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,C,-,-
+-,-,-,X,X,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,E,-,X,-,-,-,-,-,-
+-,-,-,X,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max_instructions: 3
+Solutions :
+# Ici on a une solution en 6 instructions: GRADRA
+GR(3,A)DR(6,A)
+Compétences: répétition-1, heros-orienté
+#-------------------------------------------------------------------------------------------
+Nom: IWantToBlockFree
+Type: Block
+# Liste instructions disponibles pour Block: forward (up actuellement), backward, turn_left, turn_right,
+# for_n, if_up, if_down, if_right, if_left, until_end, if_not_up, if_not_down, if_not_right, if_not_left,
+# if_up_else, if_down_else, if_right_else, if_left_else, if_not_up_else, if_not_down_else, if_not_right_else,
+# if_not_left_else
+Instructions: up, down, turn_left, turn_right, for_n, if_down_else, if_left
+Explications: Trouver le chemin le plus court
+Dimensions: 10;8
+Plateau:
+-,-,-,-,-,-,-,-,O,-
+-,-,-,X,X,X,X,X,X,X
+-,-,C,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+-,-,-,-,-,-,-,-,-,-
+Max_instructions: 8
+Solutions:
+--
+for(6)
+  up
+turn_left
+for(2)
+  up
+--
+for(7)
+  up
+turn_left
+for(2)
+  up
+turn_left
+up 
+--
+Compétences: répétition-n
+#-------------------------------------------------------------------------------------------
+Nom: PythonResque
+Type: Python
+Dépendances: turtle
+Explications: Dessiner un carré
+Solution:
+# Toujours commencer vos programmes par ces trois lignes !
+import turtle 
+franklin = turtle.Turtle() 
+franklin.shape('turtle')
+
+for i in range(4):
+  franklin.forward(100) #DEL: avancer de 100
+  franklin.left(90)     #DEL: tourner à gauche de 100
+
+franklin.forward(100) 
+franklin.left(90)     
+franklin.forward(100) #DEL: avancer de 100
+franklin.left(90)     #DEL: avancer de 100
+franklin.forward(100) #DEL: avancer de 100
+franklin.left(90)     #DEL: avancer de 100
+franklin.forward(100) #DEL: avancer de 100
+#-------------------------------------------------------------------------------------------
