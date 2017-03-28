@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
  * Permet de créer un niveau à partir d'un fichier envoyé par un enseignant
  * Permettra à celui-ci de créer des niveaux rapidement
  * Attention : format du fichier extrémement précis !
+ * Voir pour comprendre: Comment ça marche:Niveaux ludicode en texte
  * @author François
  */
 public class ParseLevel{
@@ -96,6 +97,7 @@ public class ParseLevel{
 										result+=" ";
 									}
 								}
+								System.out.println("#MDR JPP DE L'AGILE ET DE MON PARSAGE");
 							}
 							if(i!=y-1){
 								result+=",";
