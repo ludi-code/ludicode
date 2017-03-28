@@ -54,7 +54,9 @@
 
 	<script type="text/javascript">
 
-
+var niveau=["import turtle\nt = turtle.Turtle()\nt.shape('turtle')\nt.color('gray')\nfor c in range(0,4):\n    t.forward(75)\n    t.left(90)",
+		"import turtle\nt = turtle.Turtle()\nt.shape('turtle')\nt.color('gray')\nt.forward(100)\nt.backward(25)\nt.left(90)\nt.forward(100)\nt.left(90)\nt.forward(50)\nt.left(90)\nt.forward(100)"];
+var nbpage=0;
 //Python editors vars
 var running = false;
 var last_output = "", editor_output_element = null;
@@ -245,105 +247,11 @@ function initPythonEditor(editor_elem,canvas_elem, run_link, run_callback,execut
 }
 
 
-		//Configuring skulpt
-		Sk.pre = "";
-		Sk.configure({
-			output : pythonEditorOutputHandler,
-			read : pythonEditorbuiltinRead
-		});
-
-				//External libraries
-				Sk.externalLibraries = {
-
-				};
-
-
-
-				function popup_video(){
-					html5Lightbox.showLightbox(2, 'videos/tuto_python.mp4', 'Tutoriel', 480, 270, '');
-				}
-
-				$(document).ready(function(){
-
-					//Level is not playable by default
-					switchPlayable(false);
-
-					//Editeur enseignant
-					initPythonEditor(document.getElementById("python_enseignant_editor"),"python_enseignant_canvas",$("#python_enseignant_run_link"),
-						function(){
-							return true;
-						},
-						function(output, status){
-							if(status == "success"){
-								$("#run_link").show();
-								
-								skulptToImg($("#python_enseignant_canvas"), function(canvas,base64_colored, base64_monochrome){
-									level_teacher_image_result = base64_monochrome;
-									level_teacher_cimage_result = canvas;
-									switchPlayable(true);		
-								});							
-
-								alertify.success('[EDITEUR] Le code a bien été executé ! <br/><br/> Chargement du niveau');
-							}
-							else{
-								$("#run_link").show();
-								swal("Oops", "Un problème est survenu dans le code ... \n\n" + output.toString(), "error");
-								switchPlayable(false);
-							}
-						},"import turtle\nt = turtle.Turtle()\nt.shape('turtle')\nt.color('gray')\nfor c in range(0,4):\n    t.forward(75)\n    t.left(90)");
-
-
-
-					//Editeur joueur
-					initPythonEditor(document.getElementById("python_eleve_editor"),"python_eleve_canvas",$("#python_eleve_run_link"),
-						function(){
-							return level_playable;
-						},
-						function(output, status){
-							if(status == "success"){
-								$("#run_link").show();
-								//Disable preview (to compare images)
-								previewStudent("none");
-								skulptToImg($("#python_eleve_canvas"), function(canvas,base64_colored, base64_monochrome){
-									level_player_image_result = base64_monochrome;
-									level_player_cimage_result = canvas;
-
-
-									var diff_perc = compareCanvas(level_player_cimage_result, level_teacher_cimage_result) ;
-									console.log(" DIFF " + diff_perc)
-
-									if ( (diff_perc >= 0 && diff_perc <= 1.7)  ) {
-										swal("Bravo !", "Tu as bien dessiné le niveau !", "success");
-									}else{
-										var good_img_html = "<img width=200 height=200 style='margin: 10px; border: 1px solid black; display:inline-block; ' src='" + level_teacher_image_result +"' />"
-										var bad_img_html = "<img width=200 height=200 style='margin:10px; border: 1px solid black; display:inline-block;' src='" + base64_colored +"' />"
-										swal({ html:true, title:'Oops', text:"Ton dessin n'est pas le même ! Essayes de réécrire ton code <br/><br/>"+good_img_html+bad_img_html, type:"error"});
-									}
-									//Enable preview again
-									previewStudent(level_teacher_image_result);
-
-								});
-
-
-
-							}
-							else{
-								$("#run_link").show();
-								swal("Oops", "Un problème est survenu dans le code ... \n\n" + output.toString(), "error");
-
-							}
-
-
-
-
-							
-						});
-
-popup_video();
-
-});
-
-
+if(localStorage.getItem("nbpage")!=null){
+	nbpage=localStorage.getItem("nbpage");
+}else{
+	localStorage.setItem("nbpage",nbpage);
+}
 </script>
 
 
@@ -383,6 +291,7 @@ popup_video();
 								href="ludidoc.html">Ludidoc</a></li>
 								<li class="menu_bar_element" id="leaderboard_bar"><a
 									href="leaderboard.html">Classement</a></li>
+									<li class="menu_bar_element" id="stat_bar"><a href="statistiques.html">Statistiques</a></li>
 									<li class="menu_bar_element" id="groupes_bar"><a href="groupes.html">Groupes</a></li>
 									<li class="menu_bar_element" id="video_bar"><a href="videos.html">Vidéos</a></li>
 
@@ -435,20 +344,19 @@ popup_video();
 
 		<br/>
 		<h3>Editeur - Prototype</h3>
-
-
+		<script>document.write('<input type="number" value="1" min="1" max="'+niveau.length+'" id="page"/>')</script>
+		<div id="changerpage" style="color: blue; text-decoration: underline; cursor:pointer" >Aller a cette page</div>
 
 		<div class="draw_container">
 			<div class="title">
-				Programmer un niveau
+				<script>document.write('Niveau '+ (parseInt(nbpage)+1))</script>
 			</div>
 
+			<div id="python_enseignant_run_link" style="color: blue; text-decoration: underline; cursor:pointer" ><div class="tlb_btn">►</div>Lancer l'Exemple </div>
 			<div class="centered">
 				<div class="draw_toolbox" id="python_enseignant_editor" sttyle="float:left;">
 					<div class="toolbar">
-						<div class="container">
-							<div id="python_enseignant_run_link" style="color: blue; text-decoration: underline; cursor:pointer" ><div class="tlb_btn">►</div>Lancer votre programme </div>
-						</div>
+						<div class="container"></div>
 					</div>
 				</div>	
 
@@ -467,9 +375,6 @@ popup_video();
 
 
 
-			<div class="status_text" id="playable_status">
-				Programmez un niveau avant de le jouer !
-			</div>
 
 			<div class="play_overlay blur" id="playable_container">
 
@@ -510,7 +415,8 @@ popup_video();
 
 	<br />
 
-
+<div id="precedent" style="color: blue; text-decoration: underline; cursor:pointer; float:left;" >Exercice Précédent</div>
+<div id="suivant" style="color: blue; text-decoration: underline; cursor:pointer; float:right;" >Exercice Suivant</div>
 
 
 </div>
@@ -525,3 +431,138 @@ popup_video();
 </footer>
 </body>
 </html>
+
+<script>
+		//Configuring skulpt
+		Sk.pre = "";
+		Sk.configure({
+			output : pythonEditorOutputHandler,
+			read : pythonEditorbuiltinRead
+		});
+
+				//External libraries
+				Sk.externalLibraries = {
+
+				};
+
+				document.getElementById('python_enseignant_editor').style.visibility='hidden';
+
+				function popup_video(){
+					html5Lightbox.showLightbox(2, 'videos/tuto_python.mp4', 'Tutoriel', 480, 270, '');
+				}
+
+				$(document).ready(function(){
+					console.dir("test")
+					$("#suivant").on('click', function() {
+						console.dir("test")
+						if(nbpage<niveau.length-1){
+							nbpage++;
+							localStorage.setItem("nbpage",nbpage);
+							location.reload();
+						}else{
+							swal({ html:true, title:'Fin', text:"Tu as fini tout les exercices disponibles"});
+						}
+					})
+					$("#precedent").on('click', function() {
+						if(nbpage>0){
+							nbpage--;
+							localStorage.setItem("nbpage",nbpage);
+							location.reload();
+						}else{
+							swal({ html:true, title:'Début', text:"Tu es au premier exercices, essaies de faire les suivants"});
+						}
+					})
+
+					$("#changerpage").on('click', function() {
+						var nb=document.getElementById("page").value-1
+						if(nb<niveau.length  && nb>=0){
+							nbpage=nb;
+							localStorage.setItem("nbpage",nbpage);
+							location.reload();
+						}else{
+							swal({ html:true, title:'Ooops', text:"L'exercice "+(parseInt(nb)+1) +" n'est pas disponibles"});
+						}
+					})
+
+
+
+
+
+					//Level is not playable by default
+					switchPlayable(true);
+
+					//Editeur enseignant
+					initPythonEditor(document.getElementById("python_enseignant_editor"),"python_enseignant_canvas",$("#python_enseignant_run_link"),
+						function(){
+							return true;
+						},
+						function(output, status){
+							if(status == "success"){
+								$("#run_link").show();
+								
+								skulptToImg($("#python_enseignant_canvas"), function(canvas,base64_colored, base64_monochrome){
+									level_teacher_image_result = base64_monochrome;
+									level_teacher_cimage_result = canvas;
+									switchPlayable(true);		
+								});							
+
+								alertify.success('[EDITEUR] Le code a bien été executé ! <br/><br/> Chargement du niveau');
+							}
+							else{
+								$("#run_link").show();
+								swal("Oops", "Un problème est survenu dans le code ... \n\n" + output.toString(), "error");
+								switchPlayable(false);
+							}
+						},niveau[nbpage]);
+
+
+
+					//Editeur joueur
+					initPythonEditor(document.getElementById("python_eleve_editor"),"python_eleve_canvas",$("#python_eleve_run_link"),
+						function(){
+							return level_playable;
+						},
+						function(output, status){
+							if(status == "success"){
+								$("#run_link").show();
+								//Disable preview (to compare images)
+								previewStudent("none");
+								skulptToImg($("#python_eleve_canvas"), function(canvas,base64_colored, base64_monochrome){
+									level_player_image_result = base64_monochrome;
+									level_player_cimage_result = canvas;
+
+
+									var diff_perc = compareCanvas(level_player_cimage_result, level_teacher_cimage_result) ;
+									console.log(" DIFF " + diff_perc)
+
+									if ( (diff_perc >= 0 && diff_perc <= 1.7)  ) {
+										swal("Bravo !", "Tu as bien dessiné le niveau !", "success");
+									}else{
+										var good_img_html = "<img width=200 height=200 style='margin: 10px; border: 1px solid black; display:inline-block; ' src='" + level_teacher_image_result +"' />"
+										var bad_img_html = "<img width=200 height=200 style='margin:10px; border: 1px solid black; display:inline-block;' src='" + base64_colored +"' />"
+										swal({ html:true, title:'Oops', text:"Ton dessin n'est pas le même ! Essayes de réécrire ton code <br/><br/>"+good_img_html+bad_img_html, type:"error"});
+									}
+									//Enable preview again
+									previewStudent(level_teacher_image_result);
+
+								});
+
+
+
+							}
+							else{
+								$("#run_link").show();
+								swal("Oops", "Un problème est survenu dans le code ... \n\n" + output.toString(), "error");
+
+							}
+
+
+
+
+							
+						});
+if(nbpage==0){
+popup_video();
+}
+
+});</script>
