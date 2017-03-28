@@ -30,6 +30,13 @@ public class DbResetResource {
     private static LevelListDao levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
     private static LevelProgressDao levelProgressDAO = BDDFactory.getDbi().open(LevelProgressDao.class);
     
+    @GET
+    public String resetTables() {
+    	deleteTables();
+    	initTables();
+    	return "All tables reset";
+    }
+    
     private void deleteTables() {
     	userDao.dropUserTable();
     	levelListDao.dropLevelListAssociationsTable();
