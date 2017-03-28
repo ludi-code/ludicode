@@ -1,10 +1,5 @@
 package fr.iutinfo.beans;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +9,7 @@ public class Level{
 	private String name; //nom du niveau
 	private int authorId; // id de l'auteur du niveau
 	private String content; //Board mis en chaine de caractère possibilité de le parser.
-	private String levelType; // Type du level (Carte, Block, Python)
+	private String levelType; // Type du level (Carte, blocks, Python) #Pas sur pour Carte et Python
 	private boolean orientation; // si niveau orienté ou pas
 	private String instructions;
 	private int maxInstructions; // nombre d'instruction maximum acceptées
@@ -170,5 +165,10 @@ public class Level{
 	public String getSolution(){return this.solution;}
 	
 	public void setSolution(String solution){this.solution=solution;}
+	
+	public String toString(){
+		return "Id du niveau: "+getId()+"\nNom du niveau: "+getName()+"\nId de l'auteur: "+getAuthorId()+"\nContenu: "+getContent()+"\nType de niveau: "+getlevelType()
+		+"\nOrienté: "+getOrientation()+"\nInstructions: "+instructions()+"\nNombre max d'instructions: "+getMaxInstructions();
+	}
 	
 }
