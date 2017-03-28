@@ -4,7 +4,7 @@
 
 $(document).ready(function () {
 
-    function enableFacebook(enable) {
+    /*function enableFacebook(enable) {
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
                 $("#login_fb").html("Connecté à facebook !")
@@ -19,12 +19,12 @@ $(document).ready(function () {
                 }, {scope: 'public_profile,user_friends'});
             }
         });
-    }
-
+    }*/
+    
     //Activation de facebook
-    $("#login_fb").click(function () {
+    /*$("#login_fb").click(function () {
         enableFacebook(true);
-    });
+    });*/
 
     // Change le pseudo de l'utilisateur
     $("#updateNameButton").click(updateName);
@@ -78,7 +78,7 @@ $(document).ready(function () {
     /**
      * INIT FB SDK
      */
-    window.fbAsyncInit = function () {
+   /* window.fbAsyncInit = function () {
         FB.init({
             appId: '1550153965266129',
             xfbml: true,
@@ -96,7 +96,7 @@ $(document).ready(function () {
         js.src = "http://connect.facebook.net/fr_FR/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
+*/
 });
 
 function updateAvatar(evt) {
@@ -148,7 +148,7 @@ function updateName() {
         $.ajax({
             type: 'PUT',
             contentType: 'application/json',
-            url: "v1/users/updateName/" + Cookies["id"] + "/" + name,
+            url: "v2/" + Cookies["role"] + "s/updateName/" + Cookies["id"] + "/" + name,
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 if (data.success) {
@@ -186,7 +186,7 @@ function updateEmail() {
         $.ajax({
             type: 'PUT',
             contentType: 'application/json',
-            url: "v1/users/updateEmail/" + Cookies["id"] + "/" + mail,
+            url: "v2/" + Cookies["role"] + "s/updateEmail/" + Cookies["id"] + "/" + mail,
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 if (data.success) {
@@ -223,7 +223,7 @@ function updatePassword() {
         $.ajax({
             type: 'PUT',
             contentType: 'application/json',
-            url: "v1/users/updatePassword/" + Cookies["id"] + "/" + oldPassword + "/" + newPassword,
+            url: "v2/" + Cookies["role"] + "s/updatePassword/" + Cookies["id"] + "/" + oldPassword + "/" + newPassword,
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 if (data.success) {
@@ -254,14 +254,18 @@ function showProfileInfo(data) {
 
     $("#info_player").text("");
 
-    $("#info_player").append("<b> Pseudo :</b> " + data.user.name + "  ");
+    $("#info_player").append("<b> Pseudo :</b> " + data.name + "  ");
 
     // Chargement de l'image de profil
-    $("#avatar").attr("src", "images/avatars/" + data.user.name + ".png");
+    $("#avatar").attr("src", "images/avatars/" + data.name + ".png");
 
     $("#info_player").append("<input class='btn btn-default btn-xs' type='button' value='Modifier' id='pseudo_button'> <br> <br>");
-    $("#info_player").append("<b> Email :</b> " + data.user.email + "  ");
-    $("#info_player").append("<input class='btn btn-default btn-xs' type='button' value='Modifier' id='email_button'> <br> <br>");
+    
+    if(Cookies["role"] === "teacher") {
+        $("#info_player").append("<b> Email :</b> " + data.email + "  ");
+        $("#info_player").append("<input class='btn btn-default btn-xs' type='button' value='Modifier' id='email_button'> <br> <br>");
+    }
+    
     $("#info_player").append("<b> Mot de passe :</b> ******  ");
     $("#info_player").append("<input class='btn btn-default btn-xs' type='button' id='password_button' value='Modifier'> <br>");
 
@@ -279,7 +283,7 @@ function showProfileInfo(data) {
 
 function loadProfil() {
     if (location.hash == "") {
-        $.getJSON("v1/profile/me/" + Cookies["id"], function (data) {
+        $.getJSON("v2/" + Cookies["role"] + "s/me/" + Cookies["id"], function (data) {
             console.log(data);
             showProfileInfo(data);
         })
@@ -288,7 +292,7 @@ function loadProfil() {
                     location.replace("/");
                 });
     } else {
-        $.getJSON("v1/profile/" + location.hash.substring(1), function (data) {
+        $.getJSON("v2/" + Cookies["role"] + "s/" + location.hash.substring(1), function (data) {
             console.log(data);
             showProfileInfo(data);
         });
