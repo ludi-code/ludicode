@@ -38,9 +38,9 @@ public interface LevelProgressDao {
     @RegisterMapperFactory(BeanMapperFactory.class)
     LevelProgress getLevel(@Bind("idUser") int idUser, @Bind("idLevel") int idLevel);
 
-    @SqlQuery("SELECT idUser, count(idLevel) as countLevel, name "
-            + "FROM LevelProgress INNER JOIN users "
-            + "WHERE idUser = id GROUP BY idUser ORDER BY countLevel DESC")
+    @SqlQuery("SELECT idUser, count(idLevel) as countLevel, students.name "
+            + "FROM LevelProgress INNER JOIN students "
+            + "WHERE idUser = students.id GROUP BY idUser ORDER BY countLevel DESC")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<LeaderboardRow> getLevelsCount();
 

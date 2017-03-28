@@ -10,27 +10,31 @@ import fr.iutinfo.BDDFactory;
 import fr.iutinfo.beans.LeaderboardRow;
 import fr.iutinfo.beans.Level;
 import fr.iutinfo.beans.LevelInfo;
-import fr.iutinfo.beans.User;
+import fr.iutinfo.beans.Student;
+import fr.iutinfo.beans.Teacher;
 import fr.iutinfo.beans.User2;
 import fr.iutinfo.dao.LevelDao;
 import fr.iutinfo.dao.LevelProgressDao;
-import fr.iutinfo.dao.UserDao;
+import fr.iutinfo.dao.StudentDao;
+import fr.iutinfo.dao.TeacherDao;
 
 public class LevelProgressResourceTest {
 
 	private static LevelProgressDao levelProgressDao = BDDFactory.getDbi().open(LevelProgressDao.class);
-	private static UserDao userDao = BDDFactory.getDbi().open(UserDao.class);
+	private static StudentDao studentDao = BDDFactory.getDbi().open(StudentDao.class);
+	private static TeacherDao teacherDao = BDDFactory.getDbi().open(TeacherDao.class);
 	private static LevelDao levelDao = BDDFactory.getDbi().open(LevelDao.class);
 	
 	@Before
 	public void initTableInstructions() {
-		levelProgressDao = BDDFactory.getDbi().open(LevelProgressDao.class);
-		levelProgressDao.dropLevelProgessTable();
-		levelProgressDao.createLevelProgressTable();
-		userDao.dropUserTable();
-		userDao.createUserTable();
+		teacherDao.dropTeacherTable();
+		teacherDao.createTeacherTable();
+		studentDao.dropStudentTable();
+		studentDao.createStudentTable();
 		levelDao.dropLevelsTable();
 		levelDao.createLevelsTable();
+		levelProgressDao.dropLevelProgessTable();
+		levelProgressDao.createLevelProgressTable();
 	}
 	
 	@Test
@@ -66,8 +70,9 @@ public class LevelProgressResourceTest {
 	@Test
 	public void leaderboard() {
 		LevelProgressResource levelProgressResource = new LevelProgressResource();
-		userDao.insert(new User("Georges", "1234", "email@email.fr"));
-		userDao.insert(new User("Edward", "7895", "email@blabla.fr"));
+		teacherDao.insert(new Teacher());
+		studentDao.insert(new Student("Georges", "1234", 1));
+		studentDao.insert(new Student("Edward", "7895", 1));
 		Level level1 = new Level();
 		level1.setName("Level1");
 		Level level2 = new Level();
