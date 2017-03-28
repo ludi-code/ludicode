@@ -94,7 +94,7 @@
 			<!--/.navbar-collapse -->
 		</div>
 	</nav>
-
+         
 
 	<div class="container-fluid main_panel" id="game_pane">
 		<div class="row">
@@ -133,13 +133,17 @@
                             </div>
 
 						</div>
-
 						<div id="control-container" class="col-md-9">
+                             <button id="reset" type="button" class="btn btn-reset" onclick="self.location.href='test_cartes.html'">
+                                   <span class="glyphicon glyphicon-refresh"></span> Reset
+                                  </button>
+                            
 						<div class = dragCarte id="carteDiv_dragndrop"> </div>
 						<div class= "dropCarte" id="carteDiv_listeInstru">
-						
-						</div>
-					</div>
+                              
+                             
+                            </div>
+                        </div>
 				</div>
 			</div>
 
@@ -148,6 +152,7 @@
 
 
 	</div>
+  
 	<!-- /container game -->
     <div id="message_box"></div>
 
@@ -164,7 +169,7 @@
 				<div class="modal-body">
 					Vous avez fini votre niveau avec succès !<br /> Vous pouvez enregister votre niveau ou le modifier.
 				</div>
-				<div class="modal-footer">
+                <div class="modal-footer">
                     <button id="saveLevelBtn" type="button" class="btn btn-primary"
                         data-dismiss="modal">Enregister</button>
                     <button id="editLevelBtn" type="button" class="btn btn-primary"

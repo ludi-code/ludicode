@@ -241,3 +241,16 @@ ul {
     border-radius: 10px;
     transition: all 200ms linear;
 }
+.col-reset-button {
+    padding-left:10px;
+    width:140px;
+    float:left;
+}
+#reset {
+	font-size: 1.3em;
+    width: 130px;
+    position : absolute;
+    right : 45%;
+    top : 91%;
+    
+}
