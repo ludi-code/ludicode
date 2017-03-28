@@ -22,6 +22,47 @@
         <script type="text/javascript" src="scripts/page_controllers/all.js"></script>
         <script type="text/javascript" src="scripts/page_controllers/register_for_teacher.js"></script>
 
+<script type="text/javascript">
+ function gButton(nbCheck){
+    var Nom = $("#Nom").val();
+    var Prenom = $("#Prenom").val();
+    var MDP = (Nom+Prenom);
+    //Le mot de passe par défault est nom+prenom, il faut regarder si nom+prenom n'existe pas dans la base de donnée.
+    console.log(Nom +" et " + Prenom +" MDP "+ MDP);
+     registerStudent(Prenom, MDP);
+    $("#Nom").val("");
+    $("#Prenom").val("");
+
+}
+
+function registerStudent(name, password) {
+  $.ajax({
+    type : 'POST',
+    contentType : 'application/json',
+    url : "v2/students/register",
+    dataType : "json",
+    data : JSON.stringify({
+      //"id" : 0,
+      "name" : name,
+      "password" : password
+    }),
+    success : function(data, textStatus, jqXHR) {
+      console.log(data);
+      if(data.success) {
+        loginUser(name, password, "/"); 
+      } else {
+        $("#error").empty();
+        $("#error").append(data.message);
+        $("#error").show();
+      }
+    },
+    error : function(jqXHR, textStatus, errorThrown) {
+      alert('Erreur lors de l\'enregistrement de votre compte : ' + textStatus);
+    }
+  });
+}
+        </script>
+
     </head>
     <body>
         <div id="fb-root"></div>
@@ -127,7 +168,7 @@
 
    </tr>
 </table>
-
+  
 </br>
 
 <div class="boutons" style="display:none">
@@ -145,7 +186,7 @@
                             type="text" class="form-control" id="Prenom"
                             placeholder="Prenom"/>
                     </div>
- <button type="button" class="ajouter">Ajouter</button>
+ <button type="button" onclick="gButton(this)" class="ajouter">Ajouter</button>
         <!-- /container register -->
 
 
