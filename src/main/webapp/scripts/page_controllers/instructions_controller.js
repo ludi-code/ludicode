@@ -10,7 +10,7 @@ var gridHeight;
 var grid = [[]];
 
 function loadInstructions() {
-    $.getJSON("v1/instructions", function (data) {
+    $.getJSON("v2/instructions", function (data) {
         for (var i = 0; i < data.length; i++) {
             var label = data[i].name;
             if (data[i].block === 2) {
@@ -127,7 +127,7 @@ function sendLevel() {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: "v1/levels/add/" + Cookies["id"] + "/" + sessionStorage.list,
+        url: "v2/levels/add/" + Cookies["id"] + "/" + sessionStorage.list,
         dataType: "json",
         data: json,
         success: function (data, textStatus, jqXHR) {
