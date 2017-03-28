@@ -126,23 +126,19 @@ public interface LevelDao {
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<Level> getLevelsOnList(@Bind("idList") int idList);
 
-    @SqlQuery("select levels.id as levelId, levels.name as levelName, users.id as userId, users.name as userName "
-            + "from levels INNER JOIN users "
-            + "where users.id = authorId AND creationDate > (select lastNotifChecking "
-            + "FROM users "
-            + "where id = :userId) AND authorId in (select idFriend "
-            + "FROM friendsRelations "
-            + "where idUser = :userId);")
+    @SqlQuery("select levels.id as levelId, levels.name as levelName, teachers.id as userId, teachers.name as userName "
+            + "from levels INNER JOIN teachers "
+            + "where teachers.id = authorId AND creationDate > (select teachers.lastNotifChecking "
+            + "FROM teachers "
+            + "where id = :userId);")
     @RegisterMapperFactory(BeanMapperFactory.class)
     List<NotifLevel> getNewLevelsFor(@Bind("userId") int userId);
 
     @SqlQuery("select count(*) as notifCount "
-            + "from levels INNER JOIN users "
-            + "where users.id = authorId AND creationDate > (select lastNotifChecking "
-            + "FROM users "
-            + "where id = :userId) AND authorId in (select idFriend "
-            + "FROM friendsRelations "
-            + "where idUser = :userId);")
+            + "from levels INNER JOIN teachers "
+            + "where teachers.id = authorId AND creationDate > (select teachers.lastNotifChecking "
+            + "FROM teachers "
+            + "where id = :userId);")
     @RegisterMapperFactory(BeanMapperFactory.class)
     NotifLevelCount getNewLevelsCountFor(@Bind("userId") int userId);
 

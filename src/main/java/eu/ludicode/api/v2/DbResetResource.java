@@ -69,6 +69,7 @@ public class DbResetResource {
     
     private void insertTeachers() {
     	teacherDao.insert(new Teacher("totoro", Utils.hashMD5("totoro"), "totoro@totoro.to"));
+    	teacherDao.insert(new Teacher("koro-sensei", Utils.hashMD5("koro-sensei"), "koro@sensei.jp"));
     }
     
     private void insertStudents(){
