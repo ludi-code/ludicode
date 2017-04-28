@@ -12,11 +12,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * Classe permettant d'initialiser la BDD.
- * @author vitsem
- */
-
 @Path("/resetDb")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class DbResetResource {
@@ -49,36 +44,31 @@ public class DbResetResource {
     }
     
     private void initTables() {
-    	teacherDao.createTeacherTable();
     	insertTeachers();
-    	studentDao.createStudentTable();
-    	insertStudents();
-    	instructionsDao.createInstructionsTable();
-    	insertInstructions();
-    	levelListDao.createLevelListsTable();
-    	insertLevelLists();
-    	levelDao.createLevelsTable();
-    	insertLevels();
-    	levelProgressDAO.createLevelProgressTable();
-    	insertLevelProgress();
-    	levelListDao.createLevelListAssociationsTable();
-    	insertLevelListAssociations();
-    	userDao.createUserTable();
-    	insertUsers();
+        insertStudents();
+        insertInstructions();
+        insertLevelLists();
+        insertLevels();
+        insertLevelProgress();
+        insertLevelListAssociations();
+        insertUsers();
     }
     
     private void insertTeachers() {
+        teacherDao.createTeacherTable();
     	teacherDao.insert(new Teacher("totoro", Utils.hashMD5("totoro"), "totoro@totoro.to"));
     	teacherDao.insert(new Teacher("koro-sensei", Utils.hashMD5("koro-sensei"), "koro@sensei.jp"));
     }
     
     private void insertStudents(){
+        studentDao.createStudentTable();
     	studentDao.insert(new Student("toto", Utils.hashMD5("toto"), 1));
     	studentDao.insert(new Student("titi", Utils.hashMD5("titi"), 1));
     	studentDao.insert(new Student("tata", Utils.hashMD5("tata"), 1));
     }
     
     private void insertInstructions(){
+        instructionsDao.createInstructionsTable();
     	instructionsDao.insert("Avancer", "player.moveForward();", 65, 0, "images/doc/avancer.png", "images/doc/avancer.gif", "Le personnage se déplace d'une case vers avant.", 0);                    // ID 1
         instructionsDao.insert("Reculer", "player.moveBackward();", 65, 0, "images/doc/reculer.png", "images/doc/avancer.gif", "Le personnage se déplace d'une case vers l'arrière.", 0);                    // ID 2
         instructionsDao.insert("Pivoter à gauche", "player.turnLeft();", 65, 0, "images/doc/pivoter_gauche.png", "images/doc/avancer.gif", "Le personnage effectue un quart de tour vers la gauche.", 0);            // ID 3
@@ -104,12 +94,14 @@ public class DbResetResource {
     }
     
     private void insertLevelLists() {
+        levelListDao.createLevelListsTable();
     	levelListDao.createList("Tutoriel", 1);
         levelListDao.createList("Intermédiaire", 1);
         levelListDao.createList("Expert", 1);
     }
     
     private void insertLevels(){
+        levelDao.createLevelsTable();
     	levelDao.insert("Niveau 1", // name
                 		"1 2 1," +            //
                         "1 0 1," +            // Level content
@@ -251,6 +243,7 @@ public class DbResetResource {
     }
     
     private void insertLevelProgress() {
+        levelProgressDAO.createLevelProgressTable();
     	levelProgressDAO.insert(1, 1);
         levelProgressDAO.insert(1, 2);
         levelProgressDAO.insert(1, 3);
@@ -259,6 +252,7 @@ public class DbResetResource {
     }
     
     private void insertLevelListAssociations() {
+        levelListDao.createLevelListAssociationsTable();
         levelListDao.insertAssociation(1, 1, 0);
         levelListDao.insertAssociation(1, 2, 1);
         levelListDao.insertAssociation(1, 3, 2);
@@ -275,6 +269,7 @@ public class DbResetResource {
     }
     
     private void insertUsers() {
+        userDao.createUserTable();
     	userDao.insert(new User("toto", Utils.hashMD5("toto"), "toto@toto.to"));
         userDao.insert(new User("titi", Utils.hashMD5("titi"), "titi@titi.ti"));
         userDao.insert(new User("tata", Utils.hashMD5("tata"), "tata@tata.ta"));
