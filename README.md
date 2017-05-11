@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ludi-code/ludicode.svg?branch=master)](https://travis-ci.org/ludi-code/ludicode/)
+
 # Ludicode
 
 Ludicode est un système de jeux pour apprendre à coder en jouant.
