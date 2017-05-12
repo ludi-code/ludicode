@@ -1,60 +1,70 @@
 package eu.ludicode.api.v2;
 
-import java.util.ArrayList;
-
+import fr.iutinfo.BDDFactory;
+import fr.iutinfo.beans.LevelList;
+import fr.iutinfo.beans.LevelListAssociation;
+import fr.iutinfo.dao.LevelListDao;
+import fr.iutinfo.utils.Session;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.iutinfo.BDDFactory;
-import fr.iutinfo.beans.LevelList;
-import fr.iutinfo.dao.LevelListDao;
+import javax.ws.rs.WebApplicationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LevelListResourceTest {
 
-	private static LevelListDao levelListDao;
-	
-	@Before
-	public void initTableInstructions() {
-		levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
-		levelListDao.dropLevelListsTable();
-		levelListDao.createLevelListsTable();
-	}
-	@Test
-	public void table_must_be_empty() {
-		LevelListResource levelListResource = new LevelListResource();
-		ArrayList<LevelList> levels = (ArrayList<LevelList>) levelListResource.getLevelLists();
-		Assert.assertEquals(0, levels.size());
-	}
-	
-	@Test
-	public void table_must_not_be_empty_after_insert() {
-		levelListDao.createList("toto", 1);
-		LevelListResource levelListResource = new LevelListResource();
-		ArrayList<LevelList> levels = (ArrayList<LevelList>) levelListResource.getLevelLists();
-		Assert.assertTrue(levels.size()>0);
-	}
-	@Test 
-	public void must_not_find_level() {
-		Assert.assertEquals(levelListDao.findById(2), null);
-	}
-	@Test
-	public void must_find_level() {
-		levelListDao.createList("toto", 1);
-		levelListDao.createList("tata", 2);
-		LevelListResource levelListResource = new LevelListResource();
-		LevelList level = levelListResource.getLevelList(1);
-		Assert.assertEquals(level.getName(), "toto");
-	}
-	
-	@Test
-	public void must_contains_3_instructions() {
-		levelListDao.createList("toto", 1);
-		levelListDao.createList("tata", 2);
-		levelListDao.createList("titi", 3);
-		LevelListResource levelListResource = new LevelListResource();
-		ArrayList<LevelList> levels = (ArrayList<LevelList>) levelListResource.getLevelLists();
-		Assert.assertTrue(levels.size() == 3);
-	}
+    private static LevelListDao levelListDao;
 
+    @Before
+    public void initTableInstructions() {
+        levelListDao = BDDFactory.getDbi().open(LevelListDao.class);
+        levelListDao.dropLevelListsTable();
+        levelListDao.createLevelListsTable();
+        levelListDao.dropLevelListAssociationsTable();
+        levelListDao.createLevelListAssociationsTable();
+    }
+
+    @Test
+    public void after_creation_list_of_levels_should_be_empty() {
+        LevelListResource levelListResource = new LevelListResource();
+        ArrayList<LevelList> levels = (ArrayList<LevelList>) levelListResource.getLevelLists();
+        Assert.assertEquals(0, levels.size());
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void must_not_find_level() {
+        LevelListResource levelListResource = new LevelListResource();
+        LevelList level = levelListResource.findLevelListById(3);
+    }
+
+    @Test
+    public void must_find_level() {
+        levelListDao.createList("toto", 1);
+        levelListDao.createList("tata", 2);
+        LevelListResource levelListResource = new LevelListResource();
+        LevelList level = levelListResource.findLevelListById(1);
+        Assert.assertEquals(level.getName(), "toto");
+    }
+
+    @Test
+    public void must_contains_1_instructions() {
+        LevelListAssociation levelListAssociation = new LevelListAssociation();
+        LevelList levelList1 = new LevelList();
+        List<LevelListAssociation> listOfLevelListAssociations = new ArrayList<>();
+        listOfLevelListAssociations.add(levelListAssociation);
+        levelList1.setLevelsAssociation(listOfLevelListAssociations);
+
+        List<LevelList> listOfLevelLists = new ArrayList<>();
+        listOfLevelLists.add(levelList1);
+
+        LevelListResource levelListResource = new LevelListResource();
+        levelList1.setId(levelListDao.createList(levelList1.getName(), 0));
+
+        levelListResource.updateLevelLists(listOfLevelLists);
+
+        ArrayList<LevelList> levels = (ArrayList<LevelList>) levelListResource.getLevelLists();
+        Assert.assertEquals(1, levels.size());
+    }
 }
