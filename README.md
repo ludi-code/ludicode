@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ludi-code/ludicode.svg?branch=master)](https://travis-ci.org/ludi-code/ludicode/)
+[![Docker Build Statu](https://img.shields.io/docker/build/ludicode/ludicode.svg)](https://hub.docker.com/r/ludicode/ludicode/)
 
 # Ludicode
 
